@@ -5,15 +5,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
-  background-color: #121212;
   background-size: cover;
   height: 100%;
 }
 
 #wrapper {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 a {
@@ -31,10 +32,21 @@ li {
 
 .content {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #181818;
+  background: linear-gradient(
+    90deg,
+    #0c0b0b 0%,
+    #1e1c1c 33%,
+    #3b3737 60%,
+    #3b3939 65%,
+    #3c4040 75%,
+    #242222 85%,
+    #232121 90%,
+    #222020 95%,
+    #000 100%
+  );
   background-size: cover;
 }
 
@@ -119,13 +131,14 @@ li {
 
 .menu {
   width: 20%;
-  height: 100%;
-  padding: 10px;
+  min-height: 100%;
+  padding: 22px;
   color: #fff;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-color: #28272a;
+  background-color: #0c0b0b;
+  box-sizing: border-box;
 }
 
 /* SINGIN PAGE */
@@ -144,10 +157,13 @@ li {
 
 /* MENU LATERAL */
 
-.menu_title {
+.menu__logo {
   font-size: 1.2em;
   text-transform: capitalize;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
+  margin-top: 5px;
+  width: 120px;
+  height: 40px;
 }
 
 .menu-list {
@@ -157,39 +173,80 @@ li {
   width: 100%;
 }
 
-.menu-list h2 {
-  font-size: 1.2em;
-  color: #b3b3b3;
-  text-transform: uppercase;
+.menu__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 0px;
 }
 
-.menu-list ul li {
+.menu__nav li {
+  color: #9a9898;
+  width: 100%;
   font-size: 1em;
-  font-weight: 600;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
+  cursor: pointer;
+}
+
+.menu__nav li:hover {
+  color: #fff;
+}
+
+.menu__nav li img {
+  width: 20px;
+  height: 20px;
+  padding-right: 15px;
+}
+
+.menu-list h2 {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 8px;
   color: #b3b3b3;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.menu-list ul {
+  padding-left: 0px;
+}
+.menu-list ul li {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 400;
+  padding-bottom: 8px;
+  color: #b3b3b3;
+  cursor: pointer;
   text-transform: capitalize;
+}
+.menu-list li:hover {
+  color: #fff;
+}
+
+.menu-list ul li span {
+  text-transform: uppercase;
 }
 
 .playlist {
   width: 100%;
-  margin-top: 63.5%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 30%;
   border-top: 1px solid #fff;
   padding-top: 15px;
   text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
   position: relative;
   bottom: 0;
   left: 0;
   text-transform: capitalize;
 }
 
-.playlist span {
-  border: 1px solid #fff;
-  border-radius: 50%;
-  text-align: center;
-  font-weight: bold;
-  padding: 2px;
-  margin-right: 5px;
+.playlist img {
+  padding-right: 8px;
 }
 
 /* NAVIGATION PAGES */
@@ -202,30 +259,105 @@ li {
 .navigation .container {
   padding-bottom: 3px;
   margin-bottom: 5px;
-  border-bottom: #b3b3b3 solid 1px;
 }
 
 .nav-tabs {
   width: 80%;
+  margin: 0 auto;
 }
 
 .nav-tabs ul {
+  width: 80%;
   margin-top: 35px;
   display: flex;
+  align-items: flex-end;
+  align-content: flex-end;
   justify-content: space-between;
-}
-.nav-tabs ul li:nth-child(1) {
-  margin-left: -5%;
 }
 
 .nav-tabs ul li {
-  font-size: 1em;
+  font-size: 13px;
   font-weight: 500;
-  color: #7e7d80;
+  color: #7e7c80;
+  line-height: 16px;
+  cursor: pointer;
   text-transform: uppercase;
 }
 
 .nav-tabs ul li:hover {
   color: #fff;
+  font-weight: 500;
+}
+
+.card {
+  width: 150px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.card-header {
+  width: 100%;
+  height: 70%;
+  overflow: hidden;
+}
+
+.card-header__cover {
+  width: 100%;
+  height: 90%;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.card-header__disc {
+  position: absolute;
+  top: 17%;
+  left: 21%;
+  color: #fff;
+  width: 3%;
+  display: none;
+}
+
+.card-header__disc:hover {
+  display: block;
+}
+
+.card__title {
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+}
+
+.card__title span {
+  color: #ccc;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+/* COLECTIONS */
+
+.colections {
+  width: 100%;
+}
+
+.colections__title {
+  margin-top: 45px;
+  color: #fff;
+  font-size: 2.5em;
+  line-height: 44px;
   font-weight: 600;
+}
+
+.colections-grid {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.viewMore {
+  color: #fff;
+  display: inline;
 }
