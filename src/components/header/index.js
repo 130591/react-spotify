@@ -6,9 +6,6 @@ import user from "../../imagens/man-user.svg";
 export const Header = ({ children }) => (
   <>
     <header className="header">
-      <div className="head">
-        <h1>Spotify</h1>
-      </div>
       <div className="nav">
         <div className="container">
           <input type="search" className="search" />
