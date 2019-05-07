@@ -11,7 +11,7 @@ export default class SingIn extends Component {
           </div>
           <div>
             <label />
-            <input type="" className="" />
+            <input type="text" className="" />
           </div>
         </form>
       </div>

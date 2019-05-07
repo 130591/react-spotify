@@ -1,30 +1,20 @@
 import React from "react";
 
-import notification from "../../imagens/notification.svg";
-import user from "../../imagens/man-user.svg";
-
-export const Header = ({ children }) => (
-  <>
-    <header className="header">
-      <div className="nav">
-        <div className="container">
-          <input type="search" className="search" />
-          <ul className="nav-icons">
-            <li>
-              <img
-                src={notification}
-                className="nav-icons__notify"
-                alt="notificação"
-              />
-            </li>
-            <li>
-              <img src={user} className="nav-icons__user" alt="user" />
-              <span>everton</span>
-            </li>
+export const Navigation = () => {
+  return (
+    <main className="navigation">
+      <div className="container">
+        <nav className="nav-tabs">
+          <ul>
+            <li>Em Destaque</li>
+            <li>Podcasts</li>
+            <li>paradas</li>
+            <li>Gêneros</li>
+            <li>lançamentos</li>
+            <li>Descobrir</li>
           </ul>
-        </div>
+        </nav>
       </div>
-    </header>
-    {children}
-  </>
-);
+    </main>
+  );
+};
