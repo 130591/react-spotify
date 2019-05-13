@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter, Link } from 'react-router-dom';
 
 // ICONS
 import logo from "../../imagens/Spotify_Logo_RGB_White.png";
@@ -12,11 +13,16 @@ export const SideBar = () => (
     <img src={logo} className="menu__logo" />
     <ul className="menu__nav">
       <li>
-        <img src={house} /> Início
+      <BrowserRouter>
+        <img src={house} />
+          <Link to="/home"> Início</Link>
+      </BrowserRouter>
       </li>
       <li>
+      <BrowserRouter>
         <img src={search} />
-        Buscar
+       <Link to="/search"> Buscar</Link>
+      </BrowserRouter>  
       </li>
       <li>
         <img src={library} />
