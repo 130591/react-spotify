@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
 import Modal from "react-modal";
 import { Button } from "../../components/buttons/index";
@@ -20,67 +20,48 @@ const customStyles = {
   }
 };
 
-export class ModalPlaylist extends Component {
-  constructor() {
-    super();
+export const ModalPlaylist = () => {
+  const [modalIsOpen, setIsModal] = useState(false);
 
-    this.state = {
-      modalIsOpen: true
-    };
-  }
+  return (
+    <>
+      <Button styled={"btn--playlist"} onClick={this.setIsModal(true)}>
+        Nova Playlist
+      </Button>
+      {!!this.state.modalIsOpen === false ? (
+        <div className="modalContent">
+          <h1>Criar nova playlist</h1>
+        </div>
+      ) : (
+        ""
+      )}
+      <Modal
+        isOpen={this.state.modalIsOpen}
+        // onAfterOpen={this.afterOpenModal}
+        onRequestClose={this.setIsModal(false)}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div className="contentPlay">
+          <span>Nome da Playlist</span>
+          <input
+            type="text"
+            className="input-play"
+            placeholder="Comece a escrever..."
+          />
+        </div>
+      </Modal>
 
-  openModal = () => {
-    this.setState({ modalIsOpen: true });
-  };
-
-  afterOpenModal = () => {
-    this.subtitle.style.color = "#f00";
-  };
-
-  closeModal = () => {
-    this.setState({ modalIsOpen: false });
-  };
-  render() {
-    return (
-      <>
-        <Button styled={"btn--playlist"} onClick={this.openModal}>
-          Nova Playlist
-        </Button>
-        {this.state.modalIsOpen ? (
-          <div className="modalContent">
-            <h1>Criar nova playlist</h1>
-          </div>
-        ) : (
-          ""
-        )}
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          // onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <div className="contentPlay">
-            <span>Nome da Playlist</span>
-            <input
-              type="text"
-              className="input-play"
-              placeholder="Comece a escrever..."
-            />
-          </div>
-        </Modal>
-
-        {this.state.modalIsOpen ? (
-          <div className="buttonContainer">
-            <Button styled={"btn--cancele"} onClick={this.closeModal}>
-              cancelar
-            </Button>
-            <Button styled={"btn--playlist"}>Criar</Button>
-          </div>
-        ) : (
-          ""
-        )}
-      </>
-    );
-  }
-}
+      {!!this.state.modalIsOpen ? (
+        <div className="buttonContainer">
+          <Button styled={"btn--cancele"} onClick={this.setIsModal(false)}>
+            cancelar
+          </Button>
+          <Button styled={"btn--playlist"}>Criar</Button>
+        </div>
+      ) : (
+        ""
+      )}
+    </>
+  );
+};

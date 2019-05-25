@@ -406,13 +406,16 @@ li {
 .controls__left {
   width: 20px;
   color: red;
+  cursor: pointer;
 }
 .controls__right {
   width: 20px;
+  cursor: pointer;
 }
 
 .controls__play {
   width: 20px;
+  cursor: pointer;
 }
 
 .progress {
