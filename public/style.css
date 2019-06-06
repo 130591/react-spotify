@@ -36,22 +36,8 @@ li {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(
-    90deg,
-    #444343 0%,
-    #434242 5%,
-    #424141 10%,
-    #414040 15%,
-    #404040 20%,
-    #3b3737 33%,
-    #3b3737 60%,
-    #3b3939 65%,
-    #3c4040 75%,
-    #242222 85%,
-    #232121 90%,
-    #222020 95%,
-    #000 100%
-  );
+  background: linear-gradient(to right bottom, rgb(56, 84, 97), rgb(0, 0, 0)),
+    linear-gradient(transparent, rgb(0, 0, 0) 70%);
   background-size: cover;
 }
 
@@ -69,7 +55,8 @@ li {
   color: #fff;
   display: flex;
   flex-direction: column;
-  background-color: #28272a;
+  background: linear-gradient(to right bottom, rgb(56, 84, 97), rgb(0, 0, 0)),
+    linear-gradient(transparent, rgb(0, 0, 0) 70%);
 }
 
 .head {
@@ -130,6 +117,7 @@ li {
   max-width: 25%;
   padding: 4px;
   border-radius: 14px;
+  outline: none;
 }
 
 /* SECTION MENU */
@@ -167,8 +155,8 @@ li {
   text-transform: capitalize;
   margin-bottom: 20px;
   margin-top: 5px;
-  width: 120px;
-  height: 40px;
+  width: 130px;
+  height: 35px;
 }
 
 .menu-list {
@@ -304,6 +292,7 @@ li {
   cursor: pointer;
   text-align: center;
   margin-bottom: 10px;
+  padding: 10px;
 }
 
 .card-header {
@@ -315,22 +304,15 @@ li {
 .card-header__cover {
   width: 100%;
   height: 90%;
-  position: relative;
-  top: 0;
-  left: 0;
 }
 
 .card-header__disc {
-  position: absolute;
-  top: 17%;
-  left: 21%;
+  position: relative;
+  top: 17px;
+  left: 21px;
   color: #fff;
-  width: 3%;
-  display: none;
-}
-
-.card-header__disc:hover {
-  display: block;
+  width: 30px;
+  height: 30px;
 }
 
 .card__title {
@@ -366,7 +348,7 @@ li {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .collections-grid:nth-child(6n) {
@@ -474,21 +456,23 @@ li {
   font-weight: 500;
   text-transform: uppercase;
   background-color: #ccc;
+  outline: none;
 }
 
 .btn--cancele {
   width: 150px;
   background-color: #131212;
   border: 2px solid #d2d2d2;
-  border-radius: 4px;
+  border-radius: 32px;
   font-weight: 400;
+  padding: 12px 16px;
 }
 
 .btn--playlist {
   width: 140px;
-  padding: 10px 5px;
-  border-radius: 4px;
+  border-radius: 32px;
   background-color: #1ed760;
+  padding: 12px 16px;
 }
 
 .btn--playlist:hover {
@@ -522,18 +506,19 @@ li {
   font-weight: 600;
   margin-top: 10px;
   padding: 10px 0px;
+  outline: none;
 }
 
 .modalContent {
   position: absolute;
-  top: 23%;
-  left: 38%;
+  top: 22%;
+  left: 36%;
   z-index: 5;
   color: #fff;
 }
 
 .modalContent h1 {
-  font-size: 42px;
+  font-size: 46px;
   font-weight: 600;
 }
 
@@ -542,7 +527,7 @@ li {
   display: flex;
   justify-content: space-between;
   position: absolute;
-  bottom: 20%;
+  bottom: 25%;
   left: 38%;
   z-index: 5;
 }
