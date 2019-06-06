@@ -21,46 +21,52 @@ const customStyles = {
 };
 
 export const ModalPlaylist = () => {
-  const [modalIsOpen, setIsModal] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  function handleIsOpen() {
+    setModalIsOpen(true);
+  }
+
+  function handleIsClose() {
+    setModalIsOpen(false);
+    console.log("fechou");
+  }
 
   return (
     <>
-      <Button styled={"btn--playlist"} onClick={this.setIsModal(true)}>
+      <Button styled={"btn--playlist"} onPress={handleIsOpen}>
         Nova Playlist
       </Button>
-      {!!this.state.modalIsOpen === false ? (
+      {modalIsOpen === false ? (
+        ''
+      ) : (
+        <>
         <div className="modalContent">
           <h1>Criar nova playlist</h1>
         </div>
-      ) : (
-        ""
-      )}
-      <Modal
-        isOpen={this.state.modalIsOpen}
-        // onAfterOpen={this.afterOpenModal}
-        onRequestClose={this.setIsModal(false)}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <div className="contentPlay">
-          <span>Nome da Playlist</span>
-          <input
-            type="text"
-            className="input-play"
-            placeholder="Comece a escrever..."
-          />
-        </div>
-      </Modal>
-
-      {!!this.state.modalIsOpen ? (
+        <Modal
+          isOpen={modalIsOpen}
+          // onAfterOpen={modalIsOpen}
+          onRequestClose={handleIsClose}
+          style={customStyles}
+          contentLabel="PlayList"
+        >
+          <div className="contentPlay">
+            <span>Nome da Playlist</span>
+            <input
+              type="text"
+              className="input-play"
+              placeholder="Comece a escrever..."
+            />
+          </div>
+        </Modal>
         <div className="buttonContainer">
-          <Button styled={"btn--cancele"} onClick={this.setIsModal(false)}>
-            cancelar
-          </Button>
-          <Button styled={"btn--playlist"}>Criar</Button>
+            <Button styled={"btn--cancele"} onPress={handleIsClose}>
+              cancelar
+            </Button>
+            <Button styled={"btn--playlist"}>Criar</Button>
         </div>
-      ) : (
-        ""
+        </>
       )}
     </>
   );
