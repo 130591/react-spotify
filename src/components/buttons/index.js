@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-// import { Container } from './styles';
-
-export const Button = ({children, styled}) => {
-    return (
-     <button className={`btn ${styled}`} type="button">{children}</button>
-    );
-}
+export const Button = ({ children, styled, onPress }) => {
+  return (
+    <button className={`btn ${styled}`} onClick={() => onPress()} type="button">
+      {children}
+    </button>
+  );
+};
