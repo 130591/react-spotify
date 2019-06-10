@@ -15,7 +15,6 @@ const INITIAL_STATE = {
 };
 
 export default function playlist(state = INITIAL_STATE, action) {
-  console.log("executou reducer !!", action);
   switch (action.type) {
     case Types.LOADING:
       return {
