@@ -8,7 +8,7 @@ import { Types as HomeTypes } from "../ducks/home";
 
 export default function* rootSaga() {
   yield all([
-    takeEvery(HomeTypes.LOADING, asyncLoadHome),
+    takeEvery(HomeTypes.ASYNCDATA, asyncLoadHome),
     takeEvery(PlaylistsTypes.LOADING, getPlaylists),
     takeEvery(PlaylistsTypes.DATACREATE, createPlaylist)
   ]);

@@ -3,7 +3,9 @@ import { combineReducers } from "redux";
 import Home from "./home";
 import playlist from "./playlist";
 
-export default combineReducers({
+const reducers = combineReducers({
   Home,
   playlist
 });
+
+export default reducers;
