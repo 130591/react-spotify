@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+
 import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 // COMPONENTS
 import { Card } from "../components/card/index";
@@ -10,17 +11,17 @@ import { Collections, CollectionGrid } from "../components/colections/index";
 // ICONS
 import capa from "../imagens/Richie-Kotzen-Mother-Heads-Family-Reunion-1994.jpg";
 // ACTIONS
-import { Creators as homeActions } from "../store/ducks/home";
+import { Creators as Actions } from "../store/ducks/home";
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {};
+    console.log(this.props);
   }
 
   componentDidMount = () => {
-    // this.props.getLoad()
-    console.log("LOAD", this.props.getLoad);
+    this.props.request();
   };
 
   render() {
@@ -37,11 +38,17 @@ class Home extends Component {
           ]}
         />
         <Collections title="Lançamentos">
-          {this.props.home}
           <CollectionGrid>
-            <Card Image={capa} />
-            <Card Image={capa} />
-            <Card Image={capa} />
+            {!!this.props.home.data
+              ? this.props.home.data.map(data => (
+                  <Card
+                    Key={data.title}
+                    Image={capa}
+                    Title={data.title}
+                    Artist={data.name}
+                  />
+                ))
+              : "carregando"}
           </CollectionGrid>
         </Collections>
       </div>
@@ -49,13 +56,11 @@ class Home extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  bindActionCreators(homeActions, dispatch);
-};
+const mapStateToProps = state => ({ home: { ...state.Home } });
 
-const mapStateToProps = state => ({ home: state.home });
+const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 
-export default connect(state => ({
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-}))(Home);
+)(Home);
