@@ -1,10 +1,11 @@
-import { createActions, createReducer } from "reduxsauce";
-import Immutable from "seamless-immutable";
+// import { createActions, createReducer } from "reduxsauce";
+// import Immutable from "seamless-immutable";
 
 /**
  * CREATING ACTIONS TYPES
  */
 export const Types = {
+  ASYNCDATA: "HOME/ASYNC",
   DATALOAD: "HOME/LOAD_SUCCESS",
   LOADING: "HOME/LOADING",
   DATAERROR: "HOME/LOAD_ERROR"
@@ -25,7 +26,7 @@ export default function home(state = INITIAL_STATE, action) {
       };
     case Types.DATALOAD:
       return {
-        data: { data: action.payload.data, loading: false, error: false },
+        data: action.payload,
         error: false,
         loading: false
       };
@@ -42,7 +43,7 @@ export default function home(state = INITIAL_STATE, action) {
 
 export const Creators = {
   request: () => ({
-    type: Types.LOADING
+    type: Types.ASYNCDATA
   }),
 
   getData: data => ({

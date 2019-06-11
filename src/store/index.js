@@ -1,4 +1,5 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, compose, applyMiddleware } from "redux";
+import createSagaMonitor from "@clarketm/saga-monitor";
 import createSagaMiddleware from "redux-saga";
 import { composeWithDevTools } from "redux-devtools-extension";
 
@@ -6,13 +7,19 @@ import { composeWithDevTools } from "redux-devtools-extension";
  * STORES AND SAGAS
  */
 
-import rootReducer from "./ducks";
-import rootSaga from "./sagas";
+import reducers from "./ducks";
+import sagas from "./sagas";
 
-const sagaMiddleware = createSagaMiddleware();
+const middlewares = [];
 
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+const sagaMonitor = createSagaMonitor();
 
-sagaMiddleware.run(rootSaga);
+const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
+
+middlewares.push(sagaMiddleware);
+
+const store = createStore(reducers, applyMiddleware(...middlewares));
+
+sagaMiddleware.run(sagas);
 
 export default store;
