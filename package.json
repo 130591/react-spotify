@@ -6,6 +6,8 @@
     "@clarketm/saga-monitor": "^2.0.1",
     "axios": "^0.18.0",
     "howler": "^2.1.2",
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-addons-css-transition-group": "^15.6.2",
     "react-audio": "^0.0.1",
@@ -19,7 +21,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.0.2",
     "reduxsauce": "^1.1.0",
-    "seamless-immutable": "^7.1.4"
+    "seamless-immutable": "^7.1.4",
+    "styled-components": "^4.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
