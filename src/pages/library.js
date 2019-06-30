@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 
 // COMPONENTS
-import { Navigation } from "../components/header/index";
-import { Button } from "../components/buttons/index";
-import { ModalPlaylist } from "../components/modal/index";
+import { Navigation } from "../components/header";
+import { Button } from "../components/buttons";
+import { ModalPlaylist } from "../components/modal";
 
 export default class Library extends Component {
   constructor() {
     super();
     this.state = {};
   }
+
+  CreatePlayList = name => {};
 
   render() {
     return (
@@ -25,7 +27,7 @@ export default class Library extends Component {
           ]}
         />
         <div className="create">
-          <ModalPlaylist />
+          <ModalPlaylist onCreate={this.CreatePlayList} />
         </div>
       </div>
     );
