@@ -23,9 +23,7 @@ export default function playlist(state = INITIAL_STATE, action) {
       };
     case Types.DATALOAD:
       return {
-        data: { data: action.payload.data, loading: false, error: false },
-        error: false,
-        loading: false
+        data: { data: action.payload, loading: false, error: false }
       };
     case Types.DATAERROR:
       return {
@@ -36,8 +34,7 @@ export default function playlist(state = INITIAL_STATE, action) {
     case Types.DATACREATE:
       return {
         ...state,
-        error: false,
-        loading: false
+        ...action.payload
       };
     default:
       return state;
