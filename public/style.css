@@ -49,8 +49,7 @@ li {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to right bottom, rgb(56, 84, 97), rgb(0, 0, 0)),
-    linear-gradient(transparent, rgb(0, 0, 0) 70%);
+  background-color: #080808;
   background-size: cover;
 }
 
@@ -131,6 +130,32 @@ li {
   padding: 4px;
   border-radius: 14px;
   outline: none;
+}
+
+.searchOverview {
+  width: 90%;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 30px;
+  justify-content: space-between;
+}
+
+.searchOverview-media__body {
+  max-width: 250px;
+  text-align: center;
+}
+
+.searchOverview__title {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.searchOverview--subtitle {
+  color: #9a9898;
+  font-weight: 400;
+  line-height: 0px;
 }
 
 /* SECTION MENU */
@@ -270,6 +295,10 @@ li {
 .navigation .container {
   padding-bottom: 3px;
   margin-bottom: 5px;
+}
+
+.navigation--black {
+  background-color: #080808;
 }
 
 .nav-tabs {
@@ -543,4 +572,74 @@ li {
   bottom: 25%;
   left: 38%;
   z-index: 5;
+}
+
+/* MEDIA  */
+
+.media-object {
+  max-width: 300px;
+  height: 300px;
+  background-size: cover;
+}
+
+.media-object img {
+  width: 100%;
+  height: 100%;
+}
+
+/* TRACK COMPONENTS */
+
+.trackContainer {
+  width: 72%;
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+
+.trackContent {
+  width: 100%;
+  margin-top: 0px;
+  box-sizing: border-box;
+}
+
+.tracks {
+  width: 100% !important;
+  height: 60px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-left: -30px;
+  padding: 10px;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+.tracks:hover {
+  background-color: #000;
+}
+
+.tracks__info {
+  box-sizing: border-box;
+}
+
+.tracks__info h2 {
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin-bottom: 0px;
+}
+
+.tracks__info a {
+  font-size: 13px;
+  font-weight: 500;
+  color: #9a9898;
+  text-transform: capitalize;
+}
+
+.tracks__info a span {
+  margin-left: 4px;
+}
+
+.tracks__time {
+  color: #9a9898;
 }

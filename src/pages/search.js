@@ -1,55 +1,38 @@
 import React, { Component } from "react";
-
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 // COMPONENTS
-import { OffSearch } from "../components/search/index";
-import { Navigation } from "../components/header/index";
-import { Collections, CollectionGrid } from "../components/colections/index";
-import { Card } from "../components/card/index";
+import OffSearch from "../components/search";
 
-import rk from "../imagens/Richie-Kotzen-Mother-Heads-Family-Reunion-1994.jpg";
 // ACTIONS
-import { Creators as Actions } from "../store/ducks/playlist";
+import Creators from "../store/ducks/reprodutions";
+import Token from "../store/ducks/token";
 
 class Search extends Component {
+  handleSearch = e => {
+    e.preventDefault();
+    const { token } = this.props;
+    const { value } = e.target;
+    this.props.reprodutionGet(token, value);
+  };
+
   render() {
     return (
       <div className="content">
-        <OffSearch hasResult={false} />
-        <Navigation
-          content={[
-            "Principais Resultados",
-            "Artistas",
-            "Músicas",
-            "Álbuns",
-            "playlists",
-            "Podcasts"
-          ]}
-        />
-        <Collections title="Lançamentos">
-          <CollectionGrid>
-            <Card
-              Image={rk}
-              styled={{
-                card: "card",
-                cardHead: "card-header",
-                cardCover: "card-header__cover",
-                cardDisc: "card-header__disc",
-                cardTitle: "card__title"
-              }}
-            />
-          </CollectionGrid>
-        </Collections>
+        <OffSearch hasResult={this.handleSearch} />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({ playlists: { ...state.playlists } });
+const mapStateToProps = state => ({
+  playlist: state.reprodution,
+  token: state.token
+});
 
-const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...Creators, ...Token }, dispatch);
 
 export default connect(
   mapStateToProps,
