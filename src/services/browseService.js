@@ -27,4 +27,12 @@ export class AlbumService {
       }
     );
   }
+
+  static async fetchRecentlyPlay(accessToken, limit){
+    return await api.get(`https://api.spotify.com/v1/me/player/recently-played?limit=${limit}`, {
+      headers: new Headers({
+        Authorization: 'Bearer' + accessToken
+      })
+    })
+  }
 }
