@@ -1,14 +1,22 @@
 import { call, put } from "redux-saga/effects";
-import { api } from "../../services/index";
+import { PlayListService } from "../../services/playlistService";
 
-import { Creators as PlaylistsActions } from "../ducks/playlist";
+// DATA SERVICE
+import { UserService } from "../../services/userService";
+
+import { Creators } from "../ducks/playlist";
 import { Creators as ErrorsActions } from "../ducks/error";
 
-export function* getPlaylists() {
+export function* Playlists(data) {
   try {
-    const response = yield call(api.get, "/playlists");
+    const token = yield call(UserService.Token);
 
-    yield put(PlaylistsActions.getPlaylistsSuccess(response.data));
+    const resp = yield call(
+      PlayListService.createPlaylist,
+      data.id,
+      data.name,
+      token
+    );
   } catch (err) {
     yield put(
       ErrorsActions.setError("danger", "Não foi possível obter suas playlists.")
@@ -16,12 +24,23 @@ export function* getPlaylists() {
   }
 }
 
-export function* createPlaylist(id, name) {
-  const request = {};
+export function* fetchPlaylist(data) {
   try {
-    const response = yield call(api.post, request, "/playlists");
+    const token = yield call(UserService.Token);
 
-    yield put(PlaylistsActions.createPlaylist(name));
+    const resp = yield call(PlayListService.fetchPlaylistsMenu, data.id, token);
+  } catch (err) {
+    yield put(
+      ErrorsActions.setError("danger", "Não foi possível obter suas playlists.")
+    );
+  }
+}
+
+export function* createPlaylist() {
+  // const request = {};
+  try {
+    // const response = yield call(api.post, request, "/playlists");
+    // yield put(PlaylistsActions.createPlaylist(response.data));
   } catch (err) {
     yield put(
       ErrorsActions.setError("danger", "Não foi criar uma nova playlist.")
