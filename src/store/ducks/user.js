@@ -24,7 +24,6 @@ export const INITIAL_STATE = Immutable({
 
 const FetchUserSuccess = (state = INITIAL_STATE, action) => {
   return {
-    ...state,
     user: action.user,
     fetchUserError: false
   };

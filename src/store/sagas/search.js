@@ -5,18 +5,19 @@ import { SearchService } from "../../services/searchService";
 
 // ACTIONS
 import { Creators as ErrosActions } from "../ducks/error";
-import Creators from "../ducks/reprodutions";
+import Creators from "../ducks/search";
 
 export function* asyncSearch(data) {
   try {
-    yield put(Creators.reprodutionPending());
+    yield put(Creators.searchingPending());
 
     const { token, term } = data;
+
     const resp = yield call(SearchService.fetchSearching, token, term);
 
-    yield put(Creators.reprodutionSuccess(resp.data));
+    yield put(Creators.searching(resp.data));
   } catch (err) {
-    yield put(Creators.reprodutionError());
+    yield put(ErrosActions.reprodutionError());
     yield put(
       ErrosActions.setError(
         "dander",

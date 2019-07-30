@@ -1,16 +1,21 @@
 import { all, takeEvery } from "redux-saga/effects";
 
-import { Types as PlaylistsTypes } from "../ducks/playlist";
 import { AlbumsTypes } from "../ducks/albums";
 
-import { getPlaylists, createPlaylist } from "./playlist";
 import { Types } from "../ducks/home";
 import { asyncLoadHome } from "./home";
+
+import { asyncSearch } from "./search";
+import { ReprodutionsTypes } from "../ducks/reprodutions";
+
+import { Playlists, fetchPlaylist } from "./playlist";
+import { PlaylistTypes } from "../ducks/playlist";
 
 export default function* rootSaga() {
   yield all([
     takeEvery(Types.ASYNCDATA, asyncLoadHome),
-    takeEvery(PlaylistsTypes.LOADING, getPlaylists),
-    takeEvery(PlaylistsTypes.DATACREATE, createPlaylist)
+    takeEvery(ReprodutionsTypes.REPRODUTION_GET, asyncSearch),
+    takeEvery(PlaylistTypes.CREATE_PLAYLIST, Playlists),
+    takeEvery(PlaylistTypes.GET_PLAYLIST, fetchPlaylist)
   ]);
 }

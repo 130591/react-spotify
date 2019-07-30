@@ -5,11 +5,12 @@ import Immutable from "seamless-immutable";
 
 const { Types, Creators } = createActions({
   setToken: ["token"],
-  getToken: [],
+  getToken: []
 });
 
 export const TokenTypes = Types;
-export default Creators;
+const CreatorsToken = Creators;
+export default CreatorsToken;
 
 /* Initial State */
 
@@ -28,7 +29,7 @@ const SetToken = (state = INITIAL_STATE, action) => {
 
 const GetToken = (state = INITIAL_STATE, action) => {
   return {
-    ...state,
+    ...state
   };
 };
 
