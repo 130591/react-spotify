@@ -20,7 +20,7 @@ const { Types, Creators } = createActions({
   fetchRecentlyPlayedPending: [""],
   fetchRecentlyPlayedSuccess: ["songs"]
 });
-console.log(Creators);
+
 export const SongTypes = Types;
 export default Creators;
 
@@ -203,7 +203,6 @@ const IncreaseSongTime = (state = INITIAL_STATE, action) => {
 };
 
 /* Reducers to types */
-console.log(Types);
 export const Song = createReducer(INITIAL_STATE, {
   [Types.STOP_SONG]: StopSong,
   [Types.PAUSE_SONG]: PauseSong,
