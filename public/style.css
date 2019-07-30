@@ -643,3 +643,11 @@ li {
 .tracks__time {
   color: #9a9898;
 }
+
+/* PLAYER BUTTON */
+.play-btn {
+  color: #b3b3b3;
+  cursor: pointer;
+  width: 40px !important;
+  height: 40px !important;
+}

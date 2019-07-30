@@ -6,9 +6,6 @@ import { Collections, CollectionGrid } from "../colections";
 import { Navigation } from "../header";
 
 export const SearchWrapper = ({ data }) => {
-  if (data) {
-    console.log(data.items);
-  }
   return (
     <>
       <Navigation
@@ -25,23 +22,29 @@ export const SearchWrapper = ({ data }) => {
       {!!data ? (
         <>
           <SearchOverview overdata={data} />
-          <Collections title="Albums">
-            <CollectionGrid>
-              {/* {data.items.map((id, images,) => (
-            <Card
-              Key={id}
-              Image={imagens[0].url}
-              styled={{
-                card: "card",
-                cardHead: "card-header",
-                cardCover: "card-header__cover",
-                cardDisc: "card-header__disc",
-                cardTitle: "card__title"
-              }}
-            />
-          ))} */}
-            </CollectionGrid>
-          </Collections>
+          {!!data.albums.items[0] ? (
+            <Collections title="Albums">
+              <CollectionGrid>
+                {data.albums.items.map(({ id, images, name, artists }) => (
+                  <Card
+                    Key={id}
+                    Image={images[0].url}
+                    Title={name}
+                    Artist={artists[0].name}
+                    styled={{
+                      card: "card",
+                      cardHead: "card-header",
+                      cardCover: "card-header__cover",
+                      cardDisc: "card-header__disc",
+                      cardTitle: "card__title"
+                    }}
+                  />
+                ))}
+              </CollectionGrid>
+            </Collections>
+          ) : (
+            ""
+          )}
         </>
       ) : (
         ""

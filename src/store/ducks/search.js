@@ -6,7 +6,8 @@ import Immutable from "seamless-immutable";
 const { Types, Creators } = createActions({
   searching: ["data"],
   searchingPending: [],
-  searchingError: ["data"]
+  searchingError: ["data"],
+  tracks: []
 });
 
 export const SearchTypes = Types;
@@ -15,7 +16,10 @@ export default Creators;
 /* Initial State */
 
 export const INITIAL_STATE = Immutable({
-  data: []
+  data: [],
+  pending: false,
+  error: false,
+  referenceTrack: []
 });
 
 /* Reducers */
@@ -44,10 +48,20 @@ export const searchingError = (state = INITIAL_STATE) => {
   };
 };
 
+export const ReferenceTracks = (state = INITIAL_STATE, action) => {
+  return {
+    ...state,
+    error: false,
+    pending: false,
+    referenceTracks: action.data,
+  }
+}
+
 /* Reducers to types */
 
 export const search = createReducer(INITIAL_STATE, {
   [Types.SEARCHING_PENDING]: searchingPending,
   [Types.SEARCHING]: getSearching,
-  [Types.SEARCHING_ERROR]: searchingError
+  [Types.SEARCHING_ERROR]: searchingError,
+  [Types.TRACKS]: ReferenceTracks,
 });

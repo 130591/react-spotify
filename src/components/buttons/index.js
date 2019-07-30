@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 
 export const Button = ({ children, styled, onPress }) => {
   return (
@@ -6,4 +7,10 @@ export const Button = ({ children, styled, onPress }) => {
       {children}
     </button>
   );
+};
+
+Button.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
+  onPress: PropTypes.func,
+  styled: PropTypes.string
 };

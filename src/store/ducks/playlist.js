@@ -1,57 +1,54 @@
-/**
- * CREATING ACTIONS TYPES
- */
-export const Types = {
-  DATALOAD: "PLAYLIST/LOAD_SUCCESS",
-  LOADING: "PLAYLIST/LOADING",
-  DATAERROR: "PLAYLIST/LOAD_ERROR",
-  DATACREATE: "PLAYLIST/LOAD_LIST"
+import { createReducer, createActions } from "reduxsauce";
+import Immutable from "seamless-immutable";
+
+/* Types & Action Creators */
+
+const { Types, Creators } = createActions({
+  playlistPending: [],
+  playlistError: [],
+  playlistSuccess: ["data"],
+  createPlaylist: ["id", "name"],
+  getPlaylist: ["id"]
+});
+
+export const PlaylistTypes = Types;
+export default Creators;
+
+/* Initial State */
+
+export const INITIAL_STATE = Immutable({
+  // data: [],
+});
+
+/* Reducers */
+export const PlaylistError = (state = INITIAL_STATE, action) => {
+  return {
+    ...state,
+    reprodutionError: true,
+    reprodutionPending: false
+  };
 };
 
-const INITIAL_STATE = {
-  loading: false,
-  data: [],
-  error: null
+export const PlaylistPending = (state = INITIAL_STATE, action) => {
+  return {
+    ...state,
+    reprodutionError: false,
+    reprodutionPending: true
+  };
 };
 
-export default function playlist(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case Types.LOADING:
-      return {
-        ...state,
-        loading: true
-      };
-    case Types.DATALOAD:
-      return {
-        data: { data: action.payload, loading: false, error: false }
-      };
-    case Types.DATAERROR:
-      return {
-        data: [],
-        error: true,
-        loading: false
-      };
-    case Types.DATACREATE:
-      return {
-        ...state,
-        ...action.payload
-      };
-    default:
-      return state;
-  }
-}
-
-export const Creators = {
-  create: name => ({
-    type: Types.DATACREATE,
-    payload: { name }
-  }),
-  getPlaylistsRequest: () => ({
-    type: Types.LOADING
-  }),
-
-  getPlaylistsSuccess: data => ({
-    type: Types.DATALOAD,
-    payload: { data }
-  })
+export const PlaylistSuccess = (state = INITIAL_STATE, action) => {
+  return {
+    ...action.data,
+    reprodutionError: false,
+    reprodutionPending: false
+  };
 };
+
+/* Reducers to types */
+
+export const playlist = createReducer(INITIAL_STATE, {
+  [Types.PLAYLIST_ERROR]: PlaylistError,
+  [Types.PLAYLIST_PENDING]: PlaylistPending,
+  [Types.PLAYLIST_SUCCESS]: PlaylistSuccess
+});

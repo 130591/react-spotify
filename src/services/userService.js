@@ -3,9 +3,9 @@ import { api } from "./index";
 export class UserService {
   static async Request(accessToken) {
     return await api.get("https://api.spotify.com/v1/me", {
-      headers: new Headers({
-        Authorization: "Bearer" + accessToken
-      })
+      headers: {
+        Authorization: "Bearer " + accessToken
+      }
     });
   }
 

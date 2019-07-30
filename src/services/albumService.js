@@ -2,10 +2,14 @@ import { api } from "./index";
 
 export class AlbumService {
   static async fetchAlbums(accessToken) {
-    return await api(`https://api.spotify.com/v1/me/albums`, {
-      headers: new Headers({
-        Authorization: "Bearer " + accessToken
-      })
-    });
+    try {
+      return await api.get(`https://api.spotify.com/v1/me/albums`, {
+        headers: {
+          Authorization: "Bearer " + accessToken
+        }
+      });
+    } catch (err) {
+      return err;
+    }
   }
 }

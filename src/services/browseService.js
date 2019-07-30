@@ -1,6 +1,6 @@
 import { api } from "./index";
 
-export class AlbumService {
+export class BrowserService {
   static async fetchCategories(accessToken) {
     return await api.get(`https://api.spotify.com/v1/browse/categories`, {
       headers: new Headers({
@@ -28,11 +28,14 @@ export class AlbumService {
     );
   }
 
-  static async fetchRecentlyPlay(accessToken, limit){
-    return await api.get(`https://api.spotify.com/v1/me/player/recently-played?limit=${limit}`, {
-      headers: new Headers({
-        Authorization: 'Bearer' + accessToken
-      })
-    })
+  static async fetchRecentlyPlay(accessToken, limit) {
+    return await api.get(
+      `https://api.spotify.com/v1/me/player/recently-played&limit=${limit}`,
+      {
+        headers: new Headers({
+          Authorization: "Bearer" + accessToken
+        })
+      }
+    );
   }
 }

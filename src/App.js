@@ -1,24 +1,44 @@
-import React from "react";
-import { Provider } from "react-redux";
+import React, { Component } from "react";
 
-import { SideBar } from "./components/menu/index";
-import { Player } from "./components/player/index";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+
+import SideBar from "./components/menu/index";
+import Player from "./components/player/index";
 import { Routes } from "./routes";
+import { Creators } from "./store/ducks/home";
 
-import store from "./store/index";
+class App extends Component {
+  constructor(props) {
+    super();
+  }
 
-const App = () => {
-  return (
-    <>
-      <Provider store={store}>
+  async componentDidMount() {
+    this.props.request();
+  }
+
+  render() {
+    return (
+      <>
         <div id="wrapper">
           <SideBar />
           <Routes />
         </div>
         <Player />
-      </Provider>
-    </>
-  );
+      </>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    token: state.token
+  };
 };
 
-export default App;
+const mapDispatchToProps = dispatch => bindActionCreators(Creators, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

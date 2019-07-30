@@ -1,15 +1,15 @@
 import React from "react";
 
-export const Navigation = (props) => {
-  const { content } = props;
+export const Navigation = props => {
+  const { content, styled } = props;
   return (
-    <main className="navigation">
+    <main className={`navigation ${styled}`}>
       <div className="container">
-        <nav className="nav-tabs">
+        <nav className="nav-tabs ">
           <ul>
-            {
-              content.map(tab => <li>{tab}</li>)
-            }
+            {content.map(tab => (
+              <li>{tab}</li>
+            ))}
           </ul>
         </nav>
       </div>

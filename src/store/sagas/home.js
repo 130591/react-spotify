@@ -17,7 +17,7 @@ export function* asyncLoadHome() {
     yield put(Creators.fetchAlbumsPending());
     // CALL API
     const token = yield call(UserService.Token);
-    
+
     const user = yield call(UserService.Request, token);
 
     const resp = yield call(AlbumService.fetchAlbums, token);
@@ -36,7 +36,6 @@ export function* asyncLoadHome() {
     yield put(Users.fetchUserSuccess(user));
 
     yield put(CreatorsRep.reprodutionSuccess(reprodution.data));
-
   } catch (err) {
     yield put(Creators.fetchAlbumsError());
     yield put(

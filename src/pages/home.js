@@ -1,30 +1,23 @@
 import React, { Component } from "react";
-
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 // COMPONENTS
-import { Card } from "../components/card/index";
-import { Navigation } from "../components/header/index";
-import { Collections, CollectionGrid } from "../components/colections/index";
+import { Card } from "../components/card";
+import { Navigation } from "../components/header";
+import { Collections, CollectionGrid } from "../components/colections";
 
-// ICONS
-import capa from "../imagens/Richie-Kotzen-Mother-Heads-Family-Reunion-1994.jpg";
 // ACTIONS
-import { Creators as Actions } from "../store/ducks/home";
+import Creators from "../store/ducks/albums";
 
 class Home extends Component {
-  constructor() {
+  constructor(props) {
     super();
-    this.state = {};
-    console.log(this.props);
   }
 
-  componentDidMount = () => {
-    this.props.request();
-  };
-
   render() {
+    const { reprodutions } = this.props;
+    console.log(reprodutions);
     return (
       <div className="content">
         <Navigation
@@ -37,15 +30,16 @@ class Home extends Component {
             "Descobrir"
           ]}
         />
-        <Collections title="Lançamentos">
+        <Collections title="Player Recentes">
           <CollectionGrid>
-            {!!this.props.home.data
-              ? this.props.home.data.map(data => (
+            {!!reprodutions
+              ? reprodutions.items.map(data => (
                   <Card
-                    Key={data.title}
-                    Image={capa}
-                    Title={data.title}
-                    Artist={data.name}
+                    Key={data.album.id}
+                    Image={data.album.images[0].url}
+                    Title={data.album.name}
+                    Artist={data.artists[0].name}
+                    Uri={data.album.uri}
                   />
                 ))
               : "carregando"}
@@ -56,9 +50,14 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => ({ home: { ...state.Home } });
+const mapStateToProps = state => ({
+  albums: state.albums.albums,
+  reprodutions: state.reprodution.list
+});
 
-const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(Creators, dispatch);
+};
 
 export default connect(
   mapStateToProps,

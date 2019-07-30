@@ -20,7 +20,7 @@ class Search extends Component {
   render() {
     return (
       <div className="content">
-        <OffSearch hasResult={this.handleSearch} />
+        <OffSearch />
       </div>
     );
   }

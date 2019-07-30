@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import Modal from "react-modal";
-import { Button } from "../../components/buttons/index";
+import { PlayList } from "./PlayList";
+import { Button } from "../buttons";
+import { UserPlayList } from "./UserPlaylist";
+import { ButtonWrapper } from "./ButtonModalWrapper";
+// ACTIONS
+import Creators from "../../store/ducks/playlist";
 
 const customStyles = {
   content: {
@@ -20,8 +28,10 @@ const customStyles = {
   }
 };
 
-export const ModalPlaylist = () => {
+const ModalPlaylist = props => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [play, setPlay] = useState("");
+  const { user, createPlaylist, library, getPlaylist } = props;
 
   function handleIsOpen() {
     setModalIsOpen(true);
@@ -29,45 +39,66 @@ export const ModalPlaylist = () => {
 
   function handleIsClose() {
     setModalIsOpen(false);
-    console.log("fechou");
   }
+
+  const handlePlayMessage = e => {
+    e.preventDefault();
+
+    const { value } = e.target;
+    if (value) setPlay(value);
+  };
+
+  const create = e => {
+    if (user.data) createPlaylist(user.data.id, play);
+  };
+
+  useEffect(() => {
+    if (user.data) getPlaylist(user.data.id);
+  }, [getPlaylist, user]);
 
   return (
     <>
       <Button styled={"btn--playlist"} onPress={handleIsOpen}>
         Nova Playlist
       </Button>
+      <UserPlayList list={library} />
       {modalIsOpen === false ? (
-        ''
+        ""
       ) : (
         <>
-        <div className="modalContent">
-          <h1>Criar nova playlist</h1>
-        </div>
-        <Modal
-          isOpen={modalIsOpen}
-          // onAfterOpen={modalIsOpen}
-          onRequestClose={handleIsClose}
-          style={customStyles}
-          contentLabel="PlayList"
-        >
-          <div className="contentPlay">
-            <span>Nome da Playlist</span>
-            <input
-              type="text"
-              className="input-play"
-              placeholder="Comece a escrever..."
-            />
+          <div className="modalContent">
+            <h1>Criar nova playlist</h1>
           </div>
-        </Modal>
-        <div className="buttonContainer">
-            <Button styled={"btn--cancele"} onPress={handleIsClose}>
-              cancelar
-            </Button>
-            <Button styled={"btn--playlist"}>Criar</Button>
-        </div>
+          <Modal
+            isOpen={modalIsOpen}
+            // onAfterOpen={modalIsOpen}
+            onRequestClose={handleIsClose}
+            style={customStyles}
+            contentLabel="PlayList"
+          >
+            <PlayList OnChange={handlePlayMessage} />
+          </Modal>
+          <ButtonWrapper execute={create} cancele={handleIsClose} />
         </>
       )}
     </>
   );
 };
+
+ModalPlaylist.propTypes = {
+  onCreate: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  library: state.playlist,
+  token: state.token,
+  user: state.user.user
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...Creators }, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ModalPlaylist);

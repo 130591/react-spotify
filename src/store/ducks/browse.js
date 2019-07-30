@@ -9,7 +9,9 @@ const { Types, Creators } = createActions({
   fetchNewReleasesError: [],
   fetchFeaturedSuccess: ["featured"],
   fetchCategoriesSuccess: ["categories"],
-  fetchNewReleasesSuccess: ["newReleases"]
+  fetchNewReleasesSuccess: ["newReleases"],
+  recentlyPlayer: [],
+  recentlyPlayerPending: []
 });
 
 export const BrowseTypes = Types;
@@ -19,6 +21,9 @@ export default Creators;
 
 export const INITIAL_STATE = Immutable({
   // data: [],
+  fetchFeaturedError: false,
+  view: [],
+  recently: []
 });
 
 /* Reducers */
@@ -67,13 +72,20 @@ const FetchFeaturedError = (state = INITIAL_STATE, action) => {
   };
 };
 
+const FetchRecently = (state, INITIAL_STATE, action) => {
+  return {
+    recently: action.data
+  };
+};
+
 /* Reducers to types */
 
-export const reducer = createReducer(INITIAL_STATE, {
+export const browser = createReducer(INITIAL_STATE, {
   [Types.FETCH_FEATURED_ERROR]: FetchFeaturedError,
   [Types.FETCH_FEATURED_ERROR]: FetchCategoriesError,
   [Types.FETCH_NEW_RELEASES_ERROR]: FetchNewReleasesError,
   [Types.FETCH_FEATURED_SUCCESS]: FetchFeaturedSuccess,
   [Types.FETCH_FEATURED_SUCCESS]: FetchCategoriesSuccess,
-  [Types.FETCH_NEW_RELEASES_SUCCESS]: FetchNewReleasesSuccess
+  [Types.FETCH_NEW_RELEASES_SUCCESS]: FetchNewReleasesSuccess,
+  [Types.RECENTLY_PLAYER]: FetchRecently
 });
