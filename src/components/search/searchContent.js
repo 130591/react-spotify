@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SearchOverview } from "../tracks";
+import SearchOverview from "../tracks";
 import { Card } from "../card";
 import { Collections, CollectionGrid } from "../colections";
 import { Navigation } from "../header";

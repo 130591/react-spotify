@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+// COMPONENTS
 import Modal from "react-modal";
 import { PlayList } from "./PlayList";
 import { Button } from "../buttons";
@@ -29,8 +30,9 @@ const customStyles = {
 };
 
 const ModalPlaylist = props => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [play, setPlay] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const { user, createPlaylist, library, getPlaylist } = props;
 
   function handleIsOpen() {
@@ -41,15 +43,16 @@ const ModalPlaylist = props => {
     setModalIsOpen(false);
   }
 
-  const handlePlayMessage = e => {
-    e.preventDefault();
-
-    const { value } = e.target;
+  const handlePlayMessage = value => {
     if (value) setPlay(value);
   };
 
   const create = e => {
-    if (user.data) createPlaylist(user.data.id, play);
+    if (user.data) {
+      console.log('executou!!')
+      createPlaylist(user.data.id, play);
+      handleIsClose();
+    }
   };
 
   useEffect(() => {
@@ -71,7 +74,6 @@ const ModalPlaylist = props => {
           </div>
           <Modal
             isOpen={modalIsOpen}
-            // onAfterOpen={modalIsOpen}
             onRequestClose={handleIsClose}
             style={customStyles}
             contentLabel="PlayList"
