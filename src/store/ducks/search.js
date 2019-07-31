@@ -7,7 +7,7 @@ const { Types, Creators } = createActions({
   searching: ["data"],
   searchingPending: [],
   searchingError: ["data"],
-  tracks: []
+  tracks: ["data"]
 });
 
 export const SearchTypes = Types;
@@ -53,9 +53,9 @@ export const ReferenceTracks = (state = INITIAL_STATE, action) => {
     ...state,
     error: false,
     pending: false,
-    referenceTracks: action.data,
-  }
-}
+    referenceTracks: action.data
+  };
+};
 
 /* Reducers to types */
 
@@ -63,5 +63,5 @@ export const search = createReducer(INITIAL_STATE, {
   [Types.SEARCHING_PENDING]: searchingPending,
   [Types.SEARCHING]: getSearching,
   [Types.SEARCHING_ERROR]: searchingError,
-  [Types.TRACKS]: ReferenceTracks,
+  [Types.TRACKS]: ReferenceTracks
 });
