@@ -8,6 +8,7 @@ import { Creators } from "../ducks/playlist";
 import { Creators as ErrorsActions } from "../ducks/error";
 
 export function* Playlists(data) {
+  console.log(data);
   try {
     const token = yield call(UserService.Token);
 
