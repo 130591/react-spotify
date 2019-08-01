@@ -10,21 +10,21 @@ import Creators from "../../store/ducks/reprodutions";
 const OffSearch = ({ searching, token, reprodutionGet }) => {
   const [isShow, setShow] = useState(false);
 
-  const handleSearching = e => {
-    e.preventDefault();
-    const { value } = e.target;
+  const handleSearching = value => {
 
     reprodutionGet(token.token, value);
 
     if (searching.albums) setShow(true);
   };
 
+  const emitChangeDebounced = debounce(handleSearching, 3000);
+
   return (
     <>
       <input
         type="text"
         className="search"
-        onChange={e => handleSearching(e)}
+        onChange={e => emitChangeDebounced(e.target.value)}
         placeholder="Comece a digitar"
       />
       {!isShow ? (
@@ -44,7 +44,8 @@ const OffSearch = ({ searching, token, reprodutionGet }) => {
 
 const mapStateToProps = state => ({
   searching: state.search,
-  token: state.token
+  token: state.token,
+  tracks: state.search.referenceTracks
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(Creators, dispatch);
