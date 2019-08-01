@@ -409,52 +409,148 @@ li {
 /* PLAYER */
 
 .player {
-  width: 100%;
-  background-color: #282828;
   position: fixed;
-  bottom: 0%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background: rgb(40, 40, 40);
+  height: 80px;
+  z-index: 2;
 }
 
-.player audio {
-  margin: 0 auto;
-  color: red;
+.song-details {
+  position: absolute;
+  left: 20px;
+  line-height: 22px;
 }
 
-.controls {
-  width: 15%;
-  margin: 15px auto;
+.song-details .song-name {
+  font-family: "Proxima Nova", Georgia, sans-serif;
+  color: #fff;
+  font-size: 14px;
+}
+
+.song-details .artist-name {
+  font-family: "Proxima Thin", Georgia, sans-serif;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.song-controls {
+  justify-content: center;
   display: flex;
-  justify-content: space-around;
+  margin-top: 20px;
 }
 
-.controls__left {
-  width: 20px;
-  color: red;
-  cursor: pointer;
-}
-.controls__right {
-  width: 20px;
-  cursor: pointer;
-}
-
-.controls__play {
-  width: 20px;
+.forward,
+.reverse,
+.play-btn {
+  padding: 0 5px;
+  color: rgb(179, 179, 179);
   cursor: pointer;
 }
 
-.progress {
-  width: 300px;
-  height: 8px;
-  margin: 10px auto;
-  margin-left: 40%;
-  background-color: #404040;
+.reverse,
+.forward {
+  font-size: 16px;
+}
+
+.song-player-container .play-btn {
+  position: relative;
+  top: -7px;
+  font-size: 40px;
+}
+
+.song-player-container .pause-btn {
+  position: relative;
+  top: -7px;
+  font-size: 40px;
+  margin: 0 5px;
+}
+
+.play-btn .fa {
+  -webkit-text-stroke: 4px rgb(40, 40, 40);
+}
+
+.song-progress-container {
+  margin-top: -10px;
+  display: flex;
+  justify-content: center;
+}
+
+.song-progress {
+  width: 500px;
+  height: 4px;
+  background: rgb(64, 64, 64);
   border-radius: 4px;
 }
 
-.progress-play {
-  width: 50%;
-  height: 100%;
-  background-color: #fff;
+.song-expired {
+  margin: 0;
+  width: 100px;
+  height: 4px;
+  background: #1db954;
+  border-radius: 4px;
+}
+
+.timer-start {
+  font-size: 12px;
+  position: relative;
+  top: -5px;
+  left: -10px;
+}
+
+.timer-end {
+  font-size: 12px;
+  position: relative;
+  top: -5px;
+  left: 10px;
+}
+
+.volume-container {
+  position: absolute;
+  top: 48px;
+  right: 10px;
+}
+
+.volume {
+  -webkit-appearance: none;
+  width: 120px;
+  height: 5px;
+  background: #4caf50;
+  border-radius: 4px;
+  outline: none;
+  opacity: 1;
+}
+
+input[type="range"]::-moz-range-track {
+  width: 120px;
+  height: 5px;
+  background: #4caf50;
+  border-radius: 4px;
+  outline: none;
+  opacity: 1;
+}
+
+.volume-container .fa-volume-up {
+  position: relative;
+  top: 3px;
+  margin-right: 5px;
+}
+
+.volume:hover {
+  opacity: 0.8;
+  background: #4caf50;
+}
+
+.volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 50%;
 }
 
 /* PAGE SEARCH */
@@ -642,12 +738,4 @@ li {
 
 .tracks__time {
   color: #9a9898;
-}
-
-/* PLAYER BUTTON */
-.play-btn {
-  color: #b3b3b3;
-  cursor: pointer;
-  width: 40px !important;
-  height: 40px !important;
 }
