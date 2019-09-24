@@ -3,6 +3,7 @@ import { put, call } from "redux-saga/effects";
 // DATA SERVICE
 import { AlbumService } from "../../services/albumService";
 import { UserService } from "../../services/userService";
+import { BrowserService } from '../../services/browseService';
 import { PlayListService } from "../../services/playlistService";
 
 // ACTIONS
@@ -10,6 +11,8 @@ import { Creators as ErrosActions } from "../ducks/error";
 import Creators from "../ducks/albums";
 import CreatorsToken from "../ducks/token";
 import CreatorsRep from "../ducks/reprodutions";
+import playlistActions from '../ducks/playlist';
+import browseActions from '../ducks/browse';
 import Users from "../ducks/user";
 
 export function* asyncLoadHome() {
@@ -22,6 +25,10 @@ export function* asyncLoadHome() {
 
     const resp = yield call(AlbumService.fetchAlbums, token);
 
+    const recently = yield call(BrowserService.fetchRecentlyPlay, token);
+
+    const playlist = yield call(PlayListService.fetchPlaylistUser, user.data.id, token)
+
     const reprodution = yield call(
       PlayListService.reprodutionList,
       token,
@@ -33,9 +40,13 @@ export function* asyncLoadHome() {
 
     yield put(Creators.fetchAlbumsSuccess(resp.data));
 
-    yield put(Users.fetchUserSuccess(user));
+    yield put(Users.fetchUserSuccess(user.data));
 
     yield put(CreatorsRep.reprodutionSuccess(reprodution.data));
+
+    yield put(browseActions.recentlyPlayer(recently.data))
+
+    yield put(playlistActions.playlistSuccess(playlist.data))
   } catch (err) {
     yield put(Creators.fetchAlbumsError());
     yield put(

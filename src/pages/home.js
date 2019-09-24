@@ -9,15 +9,16 @@ import { Collections, CollectionGrid } from "../components/colections";
 
 // ACTIONS
 import Creators from "../store/ducks/albums";
+import { request } from '../store/ducks/home';
 
 class Home extends Component {
-  constructor(props) {
-    super();
+
+  componentDidMount = () => {
+    this.props.request()
   }
 
   render() {
-    const { reprodutions } = this.props;
-    console.log(reprodutions);
+    const { reprodutions, audioControl } = this.props;
     return (
       <div className="content">
         <Navigation
@@ -32,17 +33,17 @@ class Home extends Component {
         />
         <Collections title="Player Recentes">
           <CollectionGrid>
-            {!!reprodutions
-              ? reprodutions.items.map(data => (
-                  <Card
-                    Key={data.album.id}
-                    Image={data.album.images[0].url}
-                    Title={data.album.name}
-                    Artist={data.artists[0].name}
-                    Uri={data.album.uri}
-                  />
-                ))
-              : "carregando"}
+            {reprodutions &&
+              reprodutions.items.map(item => (
+                <Card
+                  Key={item.album.id}
+                  Image={item.album.images[0].url}
+                  Title={item.album.name}
+                  Artist={item.artists[0].name}
+                  songInfo={item}
+                  audioControl={audioControl}
+                />
+              ))}
           </CollectionGrid>
         </Collections>
       </div>
@@ -52,11 +53,13 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
   albums: state.albums.albums,
-  reprodutions: state.reprodution.list
+  reprodutions: state.reprodution.list,
+  sound: state.sound,
+  song: state.Song
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(Creators, dispatch);
+  return bindActionCreators({ request, Creators }, dispatch);
 };
 
 export default connect(

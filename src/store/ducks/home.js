@@ -8,19 +8,6 @@ export const Types = {
   ASYNCDATA: "HOME/ASYNC"
 };
 
-// const INITIAL_STATE = {
-//   loading: false,
-//   data: [],
-//   error: null
-// };
-
-export const Creators = {
-  request: () => ({
-    type: Types.ASYNCDATA
-  }),
-
-  getData: data => ({
-    type: Types.DATALOAD,
-    payload: data
-  })
-};
+export const request = () => {
+  return { type: Types.ASYNCDATA }
+}
