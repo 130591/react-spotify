@@ -36,16 +36,9 @@ const FetchUserError = (state = INITIAL_STATE, action) => {
   };
 };
 
-const AddSongToLibrarySuccess = (state = INITIAL_STATE, action) => {
-  return {
-    ...state,
-    songAddedToLibrary: true,
-    songId: action.songId
-  };
-};
-
 /* Reducers to types */
 
 export const user = createReducer(INITIAL_STATE, {
-  [Types.FETCH_USER_SUCCESS]: FetchUserSuccess
+  [Types.FETCH_USER_SUCCESS]: FetchUserSuccess,
+  [Types.FETCH_USER_ERROR]: FetchUserError
 });
