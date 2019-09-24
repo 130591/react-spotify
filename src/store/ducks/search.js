@@ -44,7 +44,6 @@ export const searchingError = (state = INITIAL_STATE) => {
 };
 
 export const searchingAlbums = (state = INITIAL_STATE, action) => {
-  console.log(action.data.albums)
   return {
     ...state,
     albums: { ...action.data.albums },
