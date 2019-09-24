@@ -18,9 +18,12 @@ class Search extends Component {
   };
 
   render() {
+    const { audioControl } = this.props
     return (
       <div className="content">
-        <OffSearch />
+        <OffSearch
+          audioControl={audioControl}
+        />
       </div>
     );
   }

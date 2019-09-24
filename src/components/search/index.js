@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
-import { SearchWrapper } from "./searchContent";
 import debounce from "lodash.debounce";
 
+import SearchWrapper from "./searchContent";
+// ACTIONS
 import Creators from "../../store/ducks/reprodutions";
+import Searching from '../../store/ducks/search';
 
-const OffSearch = ({ searching, token, reprodutionGet }) => {
+const OffSearch = ({ album, token, reprodutionGet, audioControl }) => {
   const [isShow, setShow] = useState(false);
 
   const handleSearching = value => {
 
-    reprodutionGet(token.token, value);
+    if (value) reprodutionGet(token.token, value);
 
-    if (searching.albums) setShow(true);
+    if (album) setShow(true);
+
+    if (value === '') {
+      setShow(false)
+    }
   };
 
-  const emitChangeDebounced = debounce(handleSearching, 3000);
+  const emitChangeDebounced = debounce(handleSearching, 2000);
 
   return (
     <>
@@ -36,19 +41,20 @@ const OffSearch = ({ searching, token, reprodutionGet }) => {
           </p>
         </>
       ) : (
-        <SearchWrapper data={searching} />
-      )}
+          <SearchWrapper
+            audioControl={audioControl}
+          />
+        )}
     </>
   );
 };
 
 const mapStateToProps = state => ({
-  searching: state.search,
+  album: state.search.albums,
   token: state.token,
-  tracks: state.search.referenceTracks
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(Creators, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ ...Creators, ...Searching }, dispatch);
 
 export default connect(
   mapStateToProps,

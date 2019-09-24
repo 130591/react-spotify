@@ -13,17 +13,21 @@ export function* asyncSearch(data) {
 
     const { token, term } = data;
 
-    const resp = yield call(SearchService.fetchSearching, token, term);
+    const resp = yield call(SearchService.fetchArtists, token, term);
 
+    const album = yield call(SearchService.fetchAlbum, token, term)
+    
     const tracks = yield call(
       SearchService.fetchTracksAlbums,
       token,
-      resp.data.albums.items[0].id
+      album.data.albums.items[0].id
     );
-
+   
     yield put(Creators.tracks(tracks.data));
 
-    yield put(Creators.searching(resp.data));
+    yield put(Creators.albums(album.data));
+
+    yield put(Creators.artist(resp.data));
   } catch (err) {
     yield put(ErrosActions.reprodutionError());
     yield put(

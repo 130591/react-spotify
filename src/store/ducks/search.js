@@ -7,7 +7,9 @@ const { Types, Creators } = createActions({
   searching: ["data"],
   searchingPending: [],
   searchingError: ["data"],
-  tracks: ["data"]
+  tracks: ["data"],
+  albums: ["data"],
+  artist: ["data"]
 });
 
 export const SearchTypes = Types;
@@ -16,21 +18,14 @@ export default Creators;
 /* Initial State */
 
 export const INITIAL_STATE = Immutable({
-  data: [],
+  albums: [],
+  artist: {},
   pending: false,
   error: false,
-  referenceTrack: []
+  referenceTracks: []
 });
 
 /* Reducers */
-
-export const getSearching = (state = INITIAL_STATE, action) => {
-  return {
-    ...action.data,
-    pending: false,
-    error: false
-  };
-};
 
 export const searchingPending = (state = INITIAL_STATE) => {
   return {
@@ -48,12 +43,31 @@ export const searchingError = (state = INITIAL_STATE) => {
   };
 };
 
+export const searchingAlbums = (state = INITIAL_STATE, action) => {
+  console.log(action.data.albums)
+  return {
+    ...state,
+    albums: { ...action.data.albums },
+    error: false,
+    pending: false,
+  };
+};
+
+export const searchingArtists = (state = INITIAL_STATE, action) => {
+  return {
+    ...state,
+    artist: { ...action.data.artists },
+    error: false,
+    pending: false,
+  };
+};
+
 export const ReferenceTracks = (state = INITIAL_STATE, action) => {
   return {
     ...state,
+    referenceTracks: action.data,
     error: false,
     pending: false,
-    referenceTracks: action.data
   };
 };
 
@@ -61,7 +75,8 @@ export const ReferenceTracks = (state = INITIAL_STATE, action) => {
 
 export const search = createReducer(INITIAL_STATE, {
   [Types.SEARCHING_PENDING]: searchingPending,
-  [Types.SEARCHING]: getSearching,
   [Types.SEARCHING_ERROR]: searchingError,
-  [Types.TRACKS]: ReferenceTracks
+  [Types.TRACKS]: ReferenceTracks,
+  [Types.ARTIST]: searchingArtists,
+  [Types.ALBUMS]: searchingAlbums,
 });

@@ -1,12 +1,26 @@
 import { api } from "./index";
+import * as spotify from 'spotify-web-sdk';
 
 export class SearchService {
-  static async fetchSearching(accessToken, term) {
+  static async fetchArtists(accessToken, term) {
     return await api.get(
-      `https://api.spotify.com/v1/search?q=name:${term}&type=album&artist&track&playlist`,
+      `https://api.spotify.com/v1/search?q=${term}&type=artist`,
       {
         headers: {
-          Authorization: "Bearer " + accessToken
+          Authorization: "Bearer " + accessToken,
+          Accept: 'application/json'
+        }
+      }
+    );
+  }
+
+  static async fetchAlbum(accessToken, term) {
+    return await api.get(
+      `https://api.spotify.com/v1/search?q=${term}&type=album`,
+      {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+          Accept: 'application/json'
         }
       }
     );
@@ -15,8 +29,15 @@ export class SearchService {
   static async fetchTracksAlbums(accessToken, id) {
     return await api.get(`https://api.spotify.com/v1/albums/${id}/tracks`, {
       headers: {
-        Authorization: "Bearer " + accessToken
+        Authorization: "Bearer " + accessToken,
+        Accept: 'application/json'
       }
     });
+  }
+
+  static async fetching(accessToken, term) {
+    spotify.init({ token: accessToken })
+
+    return await spotify.searchArtists(term)
   }
 }
