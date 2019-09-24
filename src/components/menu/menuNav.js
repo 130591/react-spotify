@@ -18,7 +18,7 @@ export const MenuNav = () => {
       <li>
         <img src={search} alt="Busca" />
         <BrowserRouter>
-          <Link to="/search"> Buscar</Link>
+          <Link to="/search">Buscar</Link>
         </BrowserRouter>
       </li>
       <li>
