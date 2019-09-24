@@ -10,7 +10,7 @@ const { Types, Creators } = createActions({
   fetchFeaturedSuccess: ["featured"],
   fetchCategoriesSuccess: ["categories"],
   fetchNewReleasesSuccess: ["newReleases"],
-  recentlyPlayer: [],
+  recentlyPlayer: ['data'],
   recentlyPlayerPending: []
 });
 
@@ -72,7 +72,7 @@ const FetchFeaturedError = (state = INITIAL_STATE, action) => {
   };
 };
 
-const FetchRecently = (state, INITIAL_STATE, action) => {
+const FetchRecently = (state = INITIAL_STATE, action) => {
   return {
     recently: action.data
   };
