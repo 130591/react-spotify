@@ -260,7 +260,7 @@ li {
 }
 
 .menu-list ul li span {
-  text-transform: uppercase;
+  font-size: 1.1em;
 }
 
 .playlist {
@@ -451,14 +451,23 @@ li {
 }
 
 .reverse,
+.play-btn,
 .forward {
   font-size: 16px;
+}
+
+.next-song {
+  margin-left: 10px;
+}
+
+.reverse-song {
+  margin-right: 12px;
 }
 
 .song-player-container .play-btn {
   position: relative;
   top: -7px;
-  font-size: 40px;
+  font-size: 25px;
 }
 
 .song-player-container .pause-btn {
@@ -473,7 +482,7 @@ li {
 }
 
 .song-progress-container {
-  margin-top: -10px;
+  margin-top: -3px;
   display: flex;
   justify-content: center;
 }
@@ -498,6 +507,7 @@ li {
   position: relative;
   top: -5px;
   left: -10px;
+  color: #fff;
 }
 
 .timer-end {
@@ -505,6 +515,7 @@ li {
   position: relative;
   top: -5px;
   left: 10px;
+  color: #fff;
 }
 
 .volume-container {
