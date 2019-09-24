@@ -28,6 +28,7 @@ body {
   display: flex;
   overflow-x: hidden;
   overflow-y: auto;
+  background-color: #000;
 }
 
 a {
@@ -276,7 +277,7 @@ li {
   line-height: 20px;
   font-weight: 400;
   position: relative;
-  bottom: 0;
+  bottom: 100;
   left: 0;
   text-transform: capitalize;
 }
