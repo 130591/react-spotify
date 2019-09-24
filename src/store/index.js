@@ -1,7 +1,6 @@
-import { createStore, compose, applyMiddleware } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import createSagaMonitor from "@clarketm/saga-monitor";
 import createSagaMiddleware from "redux-saga";
-import { composeWithDevTools } from "redux-devtools-extension";
 
 /**
  * STORES AND SAGAS
