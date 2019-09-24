@@ -4,10 +4,10 @@ import debounce from "lodash.debounce";
 
 export const PlayList = ({ OnChange }) => {
   const handleChange = value => {
-    OnChange(value);
+    if (value) OnChange(value);
   };
 
-  const emitChange = debounce(handleChange, 2000);
+  const emitChange = debounce(handleChange, 300);
 
   return (
     <div className="contentPlay">

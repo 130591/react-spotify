@@ -7,7 +7,7 @@ const { Types, Creators } = createActions({
   playlistPending: [],
   playlistError: [],
   playlistSuccess: ["data"],
-  createPlaylist: ["id", "name"],
+  createPlaylist: ["id", 'token', "name"],
   getPlaylist: ["id"]
 });
 
@@ -17,7 +17,9 @@ export default Creators;
 /* Initial State */
 
 export const INITIAL_STATE = Immutable({
-  // data: [],
+  data: [],
+  reprodutionError: false,
+  reprodutionPending: false
 });
 
 /* Reducers */

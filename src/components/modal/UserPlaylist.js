@@ -1,21 +1,34 @@
 import React from "react";
-
-import { Card } from "../card";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+//COMPONENTS
 import { Collections, CollectionGrid } from "../colections";
+import { Card } from "../card";
 
 export const UserPlayList = props => {
-  const { list } = props;
   return (
     <CollectionGrid>
       <Collections>
-        {/* {
-      list.items.map(
-      <Card 
-       Key={list.id}
-       Title={list.name} 
-      />
-      )} */}
+        {props.list &&
+          props.list.items.map(
+          <Card 
+           Key={props.list.id}
+           Title={props.list.name} 
+          />
+        )}
       </Collections>
     </CollectionGrid>
   );
 };
+
+const mapStateToProps = state => ({
+  list: state.library,
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ }, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserPlayList);
