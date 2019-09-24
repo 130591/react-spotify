@@ -1,20 +1,22 @@
 import React, { useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-// import { BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // ICONS
 import logo from "../../imagens/Spotify_Logo_RGB_White.png";
+import house from "../../imagens/home.svg";
+import search from "../../imagens/magnifying-glass.svg";
+import library from "../../imagens/book.svg";
 import user from "../../imagens/man-user.svg";
 
 // COMPONENTS
 import { MenuList } from "./menu";
-import { MenuNav } from "./menuNav";
 // ACTIONS
 import Creators from "../../store/ducks/browse";
 
 const SideBar = props => {
-  const { data, recentlyPlayerPending } = props;
+  const { recentlyPlayerPending, User, recently, playlist } = props;
 
   useEffect(() => {
     recentlyPlayerPending();
@@ -23,49 +25,53 @@ const SideBar = props => {
   return (
     <aside className="menu">
       <img src={logo} className="menu__logo" alt="logo" />
-      <MenuNav />
+      <ul className="menu__nav">
+        <li>
+          <img src={house} alt="home" />
+          <Link to="/callback">Início</Link>
+        </li>
+        <li>
+          <img src={search} alt="Busca" />
+          <Link to="/search">Buscar</Link>
+        </li>
+        <li>
+          <img src={library} alt="biblioteca playlist" />
+          <Link to="/playlist">Sua Biblioteca </Link>
+        </li>
+      </ul>
       <article className="menu-list">
         <h2>Tocadas recentemente</h2>
         <ul>
-          <li>
-            Into the Back <span>Album</span>
-          </li>
-          <li>
-            Jonh Coltrane<span>playlist</span>
-          </li>
-        </ul>
-      </article>
-      <article className="menu-list">
-        <h2>sua biblioteca</h2>
-        <ul>
-          <li>Músicas</li>
-          <li>Albuns</li>
-          <li>Artistas</li>
-          <li>Estilos</li>
+          {recently && recently.items && recently.items.map(r =>
+            <li key={r.track.id}>
+              {r.track.name} <span> {r.track.artists[0].name}</span>
+            </li>
+          )}
         </ul>
       </article>
       <article className="menu-list">
         <h2>PlayList</h2>
         <ul>
-          <li>Viagem</li>
-          <li>Academia</li>
-          <li>Estudos</li>
-          <li>Fim de Noite</li>
+          {playlist && playlist.items && playlist.items.map(play =>
+            <li key={play.id}>{play.name}</li>
+          )}
         </ul>
       </article>
       <MenuList />
       <div className="playlist">
         <img src={user} className="nav-icons__user" alt="user" />
-        Everton Chagas
+        {User.display_name && User.display_name}
       </div>
     </aside>
   );
 };
 
 const mapStateToProps = state => ({
-  user: state.user.user,
+  User: state.user.user,
   data: state.browser,
-  token: state.token
+  token: state.token,
+  recently: state.browser.recently,
+  playlist: state.playlist
 });
 
 const mapDispatchToProps = dispatch =>
