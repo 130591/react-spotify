@@ -30,10 +30,10 @@ const customStyles = {
 };
 
 const ModalPlaylist = props => {
-  const [play, setPlay] = useState("");
+  const [play, setPlay] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const { user, createPlaylist, library, getPlaylist } = props;
+  const { user, createPlaylist, getPlaylist, token } = props;
 
   function handleIsOpen() {
     setModalIsOpen(true);
@@ -47,42 +47,41 @@ const ModalPlaylist = props => {
     if (value) setPlay(value);
   };
 
-  const create = e => {
-    if (user.data) {
-      console.log('executou!!')
-      createPlaylist(user.data.id, play);
-      handleIsClose();
+  const create = () => {
+    if (user) {
+      createPlaylist(user.id, token.token, play);
+      // handleIsClose();
     }
   };
 
-  useEffect(() => {
-    if (user.data) getPlaylist(user.data.id);
-  }, [getPlaylist, user]);
+  useEffect(() => { if (user.data) getPlaylist(user.data.id) }, []);
 
   return (
     <>
       <Button styled={"btn--playlist"} onPress={handleIsOpen}>
         Nova Playlist
       </Button>
-      <UserPlayList list={library} />
+      <UserPlayList />
       {modalIsOpen === false ? (
         ""
       ) : (
-        <>
-          <div className="modalContent">
-            <h1>Criar nova playlist</h1>
-          </div>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={handleIsClose}
-            style={customStyles}
-            contentLabel="PlayList"
-          >
-            <PlayList OnChange={handlePlayMessage} />
-          </Modal>
-          <ButtonWrapper execute={create} cancele={handleIsClose} />
-        </>
-      )}
+          <>
+            <div className="modalContent">
+              <h1>Criar nova playlist</h1>
+            </div>
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={handleIsClose}
+              style={customStyles}
+              contentLabel="PlayList"
+            >
+              <PlayList
+                OnChange={handlePlayMessage}
+              />
+            </Modal>
+            <ButtonWrapper execute={create} cancele={handleIsClose} />
+          </>
+        )}
     </>
   );
 };
@@ -92,7 +91,6 @@ ModalPlaylist.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  library: state.playlist,
   token: state.token,
   user: state.user.user
 });

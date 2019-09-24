@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { Navigation } from "../components/header";
 import ModalPlaylist from "../components/modal";
 
-export default class Library extends Component {
+class Library extends Component {
   render() {
     return (
       <div className="content">
@@ -19,9 +19,11 @@ export default class Library extends Component {
           ]}
         />
         <div className="create">
-          <ModalPlaylist onCreate={this.CreatePlayList} />
+          <ModalPlaylist />
         </div>
       </div>
     );
   }
 }
+
+export default Library
