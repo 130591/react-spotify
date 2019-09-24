@@ -28,14 +28,16 @@ export class BrowserService {
     );
   }
 
-  static async fetchRecentlyPlay(accessToken, limit) {
-    return await api.get(
-      `https://api.spotify.com/v1/me/player/recently-played&limit=${limit}`,
-      {
-        headers: new Headers({
-          Authorization: "Bearer" + accessToken
-        })
-      }
-    );
+  static async fetchRecentlyPlay(accessToken) {
+    if (accessToken) {
+      return await api.get(
+        `https://api.spotify.com/v1/me/player/recently-played?type=track&limit=5`,
+        {
+          headers: {
+            Authorization: "Bearer " + accessToken
+          }
+        }
+      );
+    }
   }
 }

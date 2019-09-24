@@ -1,33 +1,54 @@
 import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import moment from "moment";
 
-export const SearchOverview = ({ overdata }) => {
-  const { items } = overdata.albums;
+const SearchOverview = ({ artist, tracks }) => {
+  console.log(tracks)
   return (
     <div className="searchOverview">
       <div className="searchOverview-media__body">
         <div className="media-object">
-          <img src={!!items[0] ? items[0].images[0].url : ""} alt="" />
+          <img src={artist && artist.items ? artist.items[0].images[0].url : ''} alt="capa" />
         </div>
         <h2 className="searchOverview__title">
-          {!!items[0] ? items[0].name : ""}
+          {artist && artist.items && artist.items[0].name}
         </h2>
         <p className="searchOverview__title searchOverview--subtitle">
-          {!!items[0] ? items[0].artists[0].name : ""}
+          {artist && artist.items && artist.items[0] && artist.items[0].genres && artist.items[0].genres[1]}
         </p>
       </div>
       <div className="trackContainer">
         <ol className="trackContent">
-          <li className="tracks">
-            <div className="tracks__info">
-              <h2>Humanos</h2>
-              <a href="#">
-                artista <span>música</span>
-              </a>
-            </div>
-            <span className="tracks__time">4:07</span>
-          </li>
+          {
+            tracks && tracks.items && tracks.items.map(track =>
+              <li key={track.id} className="tracks">
+                <div className="tracks__info">
+                  <h2>{track.name}</h2>
+                  <a href={track.href} alt='link'>
+                    {track.artists[0].name} <span>{artist && artist.items && artist.items[0].name}</span>
+                  </a>
+                </div>
+                <span className="tracks__time">
+                  {`${moment.duration(parseInt(track.duration_ms)).minutes()} : ${moment.duration(parseInt(track.duration_ms)).seconds()}`
+                  }
+                </span>
+              </li>
+            )}
         </ol>
       </div>
     </div>
   );
 };
+
+const mapStateToProps = state => ({
+  tracks: state.search.referenceTracks,
+  artist: state.search.albums,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchOverview);

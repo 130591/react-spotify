@@ -13,7 +13,7 @@ export default Creators;
 /* Initial State */
 
 export const INITIAL_STATE = Immutable({
-  volume: 100
+  volume: 100,
 });
 
 /* Reducers */
@@ -27,5 +27,5 @@ const UpdateVolume = (state = INITIAL_STATE, action) => {
 /* Reducers to types */
 
 export const sound = createReducer(INITIAL_STATE, {
-  [Types.UPDATE_VOLUME]: UpdateVolume
+  [Types.UPDATE_VOLUME]: UpdateVolume,
 });

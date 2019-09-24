@@ -165,7 +165,6 @@ const PlaySong = (state = INITIAL_STATE, action) => {
     ...state,
     songPlaying: true,
     songDetails: action.song,
-    songId: action.song.id,
     timeElapsed: 0,
     songPaused: false
   };
@@ -191,7 +190,7 @@ const PauseSong = (state = INITIAL_STATE, action) => {
 const ResumeSong = (state = INITIAL_STATE, action) => {
   return {
     ...state,
-    songPaused: false
+    songPaused: false,
   };
 };
 
@@ -210,9 +209,8 @@ export const Song = createReducer(INITIAL_STATE, {
   [Types.PLAY_SONG]: PlaySong,
   [Types.UPDATE_VIEW_TYPE]: UpdateViewType,
   [Types.INCREASE_SONG_TIME]: IncreaseSongTime,
-  [Types.FETCH_SONGS_ERROR]: FetchSongsPending,
+  [Types.FETCH_SONGS_PENDING]: FetchSongsPending,
   [Types.SEARCH_SONGS_ERROR]: SearchSongsError,
-  // [Types.FETCH_ARTIST_SONGS_PENDING]: FetchArtistSongsPending,
   [Types.SEARCH_SONGS_PENDING]: SearchSongsPending,
   [Types.FETCH_RECENTLY_PLAYED_ERROR]: FetchRecentlyPlayedError,
   [Types.FETCH_SONGS_SUCCESS]: FetchSongsSuccess,
