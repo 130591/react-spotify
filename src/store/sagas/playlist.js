@@ -11,7 +11,6 @@ export function* Playlists({ id }) {
     const token = yield call(UserService.Token);
 
     const resp = yield call(PlayListService.fetchUserPlaylist, id, token);
-    console.log('playlist', resp)
 
   } catch (err) {
     yield put(
@@ -23,8 +22,8 @@ export function* Playlists({ id }) {
 export function* createPlaylist(data) {
   try {
     const resp = yield call(PlayListService.createPlaylist, data.id, data.name, data.token);
-    console.log(resp)
-    // put(Creators.playlistSuccess(resp.data))
+
+    put(Creators.playlistSuccess(resp.data))
   } catch (err) {
     yield put(
       ErrorsActions.setError("danger", "Não foi possível obter suas playlists.")
