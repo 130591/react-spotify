@@ -1,13 +1,13 @@
 #React-Spotify
 This is React-Spotify, a React front end client that communicates with the Spotify API.
 
-![Home](screencapture-localhost-3000-callback-2019-09-24-20_51_21.png)
+![Home](assets/screencapture-localhost-3000-callback-2019-09-24-20_51_21.png)
 
-![Search](screencapture-localhost-3000-search-2019-09-24-20_41_30.png)
+![Search](assets/screencapture-localhost-3000-search-2019-09-24-20_41_30.png)
 
-![Search Active](screencapture-localhost-3000-search-2019-09-24-20_42_30.png)
+![Search Active](assets/screencapture-localhost-3000-search-2019-09-24-20_42_30.png)
 
-![Library](screencapture-localhost-3000-playlist-2019-09-24-21_14_48.png)
+![Library](assets/screencapture-localhost-3000-playlist-2019-09-24-21_14_48.png)
 
 ## Guia de instalação
 
