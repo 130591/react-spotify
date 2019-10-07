@@ -1,5 +1,3 @@
-// import { createActions, createReducer } from "reduxsauce";
-// import Immutable from "seamless-immutable";
 
 /**
  * CREATING ACTIONS TYPES

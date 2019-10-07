@@ -1,5 +1,5 @@
 import { createReducer, createActions } from "reduxsauce";
-import Immutable from "seamless-immutable";
+import Immutable from 'seamless-immutable';
 
 /* Types & Action Creators */
 
@@ -40,11 +40,7 @@ export const PlaylistPending = (state = INITIAL_STATE, action) => {
 };
 
 export const PlaylistSuccess = (state = INITIAL_STATE, action) => {
-  return {
-    ...action.data,
-    reprodutionError: false,
-    reprodutionPending: false
-  };
+  return { ...action.data, reprodutionError: false, reprodutionPending: false };
 };
 
 /* Reducers to types */

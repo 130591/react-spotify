@@ -21,7 +21,7 @@ const SearchWrapper = ({ albums, audioControl }) => {
         ]}
         styled={"navigation--black"}
       />
-      <SearchOverview />
+      <SearchOverview audioControl={audioControl} />
       <Collections>
         <CollectionGrid>
           {albums && albums.items && albums.items.map(item =>

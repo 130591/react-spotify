@@ -1,5 +1,5 @@
 import { createReducer, createActions } from "reduxsauce";
-import Immutable from "seamless-immutable";
+import Immutable from 'seamless-immutable';
 
 /* Types & Action Creators */
 
@@ -36,11 +36,11 @@ export const searchingPending = (state = INITIAL_STATE) => {
 };
 
 export const searchingError = (state = INITIAL_STATE) => {
-  return {
+  state.merge({
     ...state,
     error: true,
     pending: false
-  };
+  });
 };
 
 export const searchingAlbums = (state = INITIAL_STATE, action) => {

@@ -8,11 +8,10 @@ import actions from '../../store/ducks/sound';
 
 export const Card = (props, styled) => {
   const { Image, Title, Artist, Key, songInfo, audioControl } = props;
-
   return (
     <article
       className={`card ${styled.card}`}
-      key={Key + 1}
+      key={Key}
       onClick={() => audioControl(songInfo)}
     >
       <div className={`card-header ${styled.cardHead}`}>

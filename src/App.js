@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 //COMPONENTS
-import { Routes } from './routes';
+import Routes from './routes';
 import Player from './components/player';
 import Creators from './store/ducks/song';
 

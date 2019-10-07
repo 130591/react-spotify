@@ -1,5 +1,5 @@
 import { createReducer, createActions } from "reduxsauce";
-import Immutable from "seamless-immutable";
+import Immutable from 'seamless-immutable';
 
 /* Types & Action Creators */
 
@@ -16,32 +16,23 @@ export default Creators;
 /* Initial State */
 
 export const INITIAL_STATE = Immutable({
-  // data: [],
+  albums: [],
+  fetchAlbumsPending: false,
+  fetchAlbumsSuccess: false,
+  fetchAlbumsError: false,
 });
 
 /* Reducers */
 const FetchAlbumsPending = (state = INITIAL_STATE, action) => {
-  return {
-    ...state,
-    fetchAlbumsPending: true
-  };
+  return { ...state, fetchAlbumsPending: true };
 };
 
 const fetchAlbumsSuccess = (state = INITIAL_STATE, action) => {
-  return {
-    ...state,
-    albums: action.albums,
-    fetchAlbumsError: false,
-    fetchAlbumsPending: false
-  };
+  return { ...state, albums: action.albums, fetchAlbumsError: false, fetchAlbumsPending: false };
 };
 
 const fetchAlbumsError = (state = INITIAL_STATE, action) => {
-  return {
-    ...state,
-    fetchAlbumsError: true,
-    fetchAlbumsPending: false
-  };
+  return { ...state, fetchAlbumsError: true, fetchAlbumsPending: false };
 };
 
 /* Reducers to types */

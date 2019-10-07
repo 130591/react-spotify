@@ -1,5 +1,5 @@
 import { createReducer, createActions } from "reduxsauce";
-import Immutable from "seamless-immutable";
+import Immutable from 'seamless-immutable';
 
 /* Types & Action Creators */
 
@@ -15,7 +15,11 @@ export default Creators;
 /* Initial State */
 
 export const INITIAL_STATE = Immutable({
-  data: []
+  artistList: [],
+  artistIds: null,
+  fetchArtistsError: false,
+  fetchArtistsPending: false,
+  fetchArtistsSuccess: false,
 });
 
 /* Reducers */

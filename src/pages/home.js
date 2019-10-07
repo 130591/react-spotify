@@ -14,7 +14,7 @@ import { request } from '../store/ducks/home';
 class Home extends Component {
 
   componentDidMount = () => {
-    this.props.request()
+    this.props.request();
   }
 
   render() {
@@ -34,7 +34,7 @@ class Home extends Component {
         <Collections title="Player Recentes">
           <CollectionGrid>
             {reprodutions &&
-              reprodutions.items.map(item => (
+              reprodutions.map(item => (
                 <Card
                   Key={item.album.id}
                   Image={item.album.images[0].url}

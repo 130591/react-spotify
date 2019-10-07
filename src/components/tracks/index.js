@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 
-const SearchOverview = ({ artist, tracks }) => {
-  console.log(tracks)
+const SearchOverview = ({ artist, tracks, audioControl }) => {
   return (
     <div className="searchOverview">
       <div className="searchOverview-media__body">
@@ -22,10 +21,10 @@ const SearchOverview = ({ artist, tracks }) => {
         <ol className="trackContent">
           {
             tracks && tracks.items && tracks.items.map(track =>
-              <li key={track.id} className="tracks">
+              <li key={track.id} className="tracks" onClick={() => audioControl(track)} >
                 <div className="tracks__info">
                   <h2>{track.name}</h2>
-                  <a href={track.href} alt='link'>
+                  <a alt='link'>
                     {track.artists[0].name} <span>{artist && artist.items && artist.items[0].name}</span>
                   </a>
                 </div>

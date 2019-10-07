@@ -14,10 +14,14 @@ import CreatorsRep from "../ducks/reprodutions";
 import playlistActions from '../ducks/playlist';
 import browseActions from '../ducks/browse';
 import Users from "../ducks/user";
+// UTILS
+import { comparator } from '../../utils/comparator';
 
 export function* asyncLoadHome() {
   try {
+
     yield put(Creators.fetchAlbumsPending());
+    
     // CALL API
     const token = yield call(UserService.Token);
 
@@ -34,7 +38,7 @@ export function* asyncLoadHome() {
       token,
       "tracks"
     );
-
+    
     // ACTIONS TRIGGERS
     yield put(CreatorsToken.setToken(token));
 
@@ -42,7 +46,7 @@ export function* asyncLoadHome() {
 
     yield put(Users.fetchUserSuccess(user.data));
 
-    yield put(CreatorsRep.reprodutionSuccess(reprodution.data));
+    yield put(CreatorsRep.reprodutionSuccess(comparator(reprodution.data.items)));
 
     yield put(browseActions.recentlyPlayer(recently.data))
 
