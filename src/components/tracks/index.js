@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+
+import PropTypes from 'prop-types';
 import moment from "moment";
 
 const SearchOverview = ({ artist, tracks, audioControl }) => {
@@ -39,6 +41,11 @@ const SearchOverview = ({ artist, tracks, audioControl }) => {
     </div>
   );
 };
+
+SearchOverview.propTypes = {
+  tracks: PropTypes.object,
+  artist: PropTypes.object
+}
 
 const mapStateToProps = state => ({
   tracks: state.search.referenceTracks,

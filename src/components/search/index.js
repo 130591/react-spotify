@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import debounce from "lodash.debounce";
 
+import PropTypes from 'prop-types';
+
+import debounce from "lodash.debounce";
 import SearchWrapper from "./searchContent";
 // ACTIONS
 import Creators from "../../store/ducks/reprodutions";
 import Searching from '../../store/ducks/search';
 
-const OffSearch = ({ album, token, reprodutionGet, audioControl }) => {
+const OffSearch = ({ albums, token, reprodutionGet, audioControl }) => {
   const [isShow, setShow] = useState(false);
 
   const handleSearching = value => {
 
     if (value) reprodutionGet(token.token, value);
 
-    if (album) setShow(true);
+    if (albums) setShow(true);
 
     if (value === '') {
       setShow(false)
@@ -48,6 +50,11 @@ const OffSearch = ({ album, token, reprodutionGet, audioControl }) => {
     </>
   );
 };
+
+OffSearch.propTypes = {
+  album: PropTypes.array,
+  token: PropTypes.string.isRequired
+}
 
 const mapStateToProps = state => ({
   album: state.search.albums,

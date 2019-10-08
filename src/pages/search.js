@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
+import PropTypes from 'prop-types';
+
 // COMPONENTS
 import OffSearch from "../components/search";
 
@@ -12,8 +14,10 @@ import Token from "../store/ducks/token";
 class Search extends Component {
   handleSearch = e => {
     e.preventDefault();
+    
     const { token } = this.props;
     const { value } = e.target;
+
     this.props.reprodutionGet(token, value);
   };
 
@@ -27,6 +31,11 @@ class Search extends Component {
       </div>
     );
   }
+}
+
+Search.propTypes = {
+  playlist: PropTypes.array,
+  token: PropTypes.string.isRequired
 }
 
 const mapStateToProps = state => ({

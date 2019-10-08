@@ -3,6 +3,8 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import PropTypes from 'prop-types';
+
 // ICONS
 import logo from "../../imagens/Spotify_Logo_RGB_White.png";
 import house from "../../imagens/home.svg";
@@ -65,6 +67,14 @@ const SideBar = props => {
     </aside>
   );
 };
+
+SideBar.propTypes = {
+  User: PropTypes.object.isRequired,
+  data: PropTypes.object,
+  token: PropTypes.object,
+  recently: PropTypes.array.isRequired,
+  playlist: PropTypes.object.isRequired
+}
 
 const mapStateToProps = state => ({
   User: state.user.user,

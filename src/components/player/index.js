@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import VolumeControls from "./controlVolume";
+import PropTypes from 'prop-types';
+
 import SongControl from "./playerSong";
+import VolumeControls from "./controlVolume";
 //ACTIONS
 import Creators from '../../store/ducks/song';
 
@@ -87,6 +89,14 @@ class Player extends Component {
 			</div>
 		);
 	};
+}
+
+Player.propTypes = {
+	token: PropTypes.object,
+	timeElapsed: PropTypes.number,
+	sondPaused: PropTypes.bool,
+	songPlaying: PropTypes.bool.isRequired,
+	songDetails: PropTypes.object
 }
 
 const mapStateToProps = state => ({

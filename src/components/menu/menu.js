@@ -12,5 +12,5 @@ export const MenuList = ({ players, category }) => {
 
 MenuList.propTypes = {
   players: PropTypes.array,
-  category: PropTypes.string.isRequired
+  category: PropTypes.string
 };

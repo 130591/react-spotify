@@ -31,7 +31,7 @@ function Routes({ audioControl, token }) {
         <Route exact path="/search" 
          render={(props) => token ? 
          <Search {...props} audioControl={audioControl} /> : 
-         <Redirect to={'/'} />
+         <Redirect to={'/callback'} />
          }
          />
       </Switch>

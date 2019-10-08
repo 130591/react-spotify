@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
+import PropTypes from 'prop-types';
 import moment from "moment";
 
 const SongControl = (props) => {
@@ -59,6 +60,15 @@ const SongControl = (props) => {
     </div>
   );
 };
+
+SongControl.propTypes = {
+  songPaused: PropTypes.func,
+  resumeSong: PropTypes.func,
+  pauseSong: PropTypes.func,
+  timeElapsed: PropTypes.number,
+  playing: PropTypes.bool,
+  paused: PropTypes.bool
+}
 
 const mapStateToProps = (state) => {
   return {

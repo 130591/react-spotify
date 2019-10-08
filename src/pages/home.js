@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
+import PropTypes from "prop-types";
+
 // COMPONENTS
 import { Card } from "../components/card";
 import { Navigation } from "../components/header";
@@ -49,6 +51,11 @@ class Home extends Component {
       </div>
     );
   }
+}
+
+Home.propTypes = {
+  audioControl: PropTypes.func,
+  reprodutions: PropTypes.array
 }
 
 const mapStateToProps = state => ({

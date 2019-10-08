@@ -2,10 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import SearchOverview from "../tracks";
+import PropTypes from 'prop-types';
+
 import { Card } from "../card";
-import { Collections, CollectionGrid } from "../colections";
 import { Navigation } from "../header";
+import SearchOverview from "../tracks";
+import { Collections, CollectionGrid } from "../colections";
+
 
 const SearchWrapper = ({ albums, audioControl }) => {
   return (
@@ -38,6 +41,10 @@ const SearchWrapper = ({ albums, audioControl }) => {
       </Collections>
     </>
   )
+}
+
+SearchWrapper.propTypes = {
+  albums: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
