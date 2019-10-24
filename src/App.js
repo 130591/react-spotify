@@ -2,15 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 
 //COMPONENTS
 import Routes from './routes';
 import Player from './components/player';
 import Creators from './store/ducks/song';
+import { request } from './store/ducks/home';
 
 class App extends Component {
 	static audio;
+
+	componentWillMount = () => {
+		this.props.request();
+	}
 
 	componentWillReceiveProps(nextProps) {
 		if (this.audio !== undefined) {
@@ -82,7 +86,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators({ ...Creators }, dispatch);
+	return bindActionCreators({ request, ...Creators }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

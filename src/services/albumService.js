@@ -12,4 +12,16 @@ export class AlbumService {
       return err;
     }
   }
+
+  static async albumDetails(accessToken, id) {
+    try {
+      return await api.get(`https://api.spotify.com/v1/albums/${id}`, {
+        headers: {
+          Authorization: "Bearer " + accessToken
+        }
+      });
+    } catch (err) {
+      return err;
+    }
+  }
 }

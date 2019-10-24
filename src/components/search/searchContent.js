@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
@@ -27,15 +28,17 @@ const SearchWrapper = ({ albums, audioControl }) => {
       <SearchOverview audioControl={audioControl} />
       <Collections>
         <CollectionGrid>
-          {albums && albums.items && albums.items.map(item =>
-            <Card
-              Key={item.id}
-              Image={item.images[0].url}
-              Title={item.name}
-              Artist={item.artists[0].name}
-              songInfo={item}
-              audioControl={audioControl}
-            />
+          {albums && albums.items && albums.items.map(album =>
+            <Link to={`/album/${album.id}`}>
+              <Card
+                Key={album.id}
+                Image={album.images[0].url}
+                Title={album.name}
+                Artist={album.artists[0].name}
+                songInfo={album}
+                audioControl={() => {}}
+              />
+            </Link>
           )}
         </CollectionGrid>
       </Collections>

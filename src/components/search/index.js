@@ -15,16 +15,16 @@ const OffSearch = ({ albums, token, reprodutionGet, audioControl }) => {
 
   const handleSearching = value => {
 
-    if (value) reprodutionGet(token.token, value);
+    if (value) reprodutionGet(token, value);
 
     if (albums) setShow(true);
 
-    if (value === '') {
+    if (!albums) {
       setShow(false)
     }
   };
 
-  const emitChangeDebounced = debounce(handleSearching, 2000);
+  const emitChangeDebounced = debounce(handleSearching, 1000);
 
   return (
     <>
@@ -58,7 +58,7 @@ OffSearch.propTypes = {
 
 const mapStateToProps = state => ({
   album: state.search.albums,
-  token: state.token,
+  token: state.token.token,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...Creators, ...Searching }, dispatch);

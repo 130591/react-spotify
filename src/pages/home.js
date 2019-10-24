@@ -11,14 +11,8 @@ import { Collections, CollectionGrid } from "../components/colections";
 
 // ACTIONS
 import Creators from "../store/ducks/albums";
-import { request } from '../store/ducks/home';
 
 class Home extends Component {
-
-  componentDidMount = () => {
-    this.props.request();
-  }
-
   render() {
     const { reprodutions, audioControl } = this.props;
     return (
@@ -66,7 +60,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ request, Creators }, dispatch);
+  return bindActionCreators({ ...Creators }, dispatch);
 };
 
 export default connect(

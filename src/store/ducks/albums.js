@@ -7,7 +7,9 @@ const { Types, Creators } = createActions({
   fetchAlbumsAsyncData: ["accessToken"],
   fetchAlbumsPending: [],
   fetchAlbumsSuccess: ["albums"],
-  fetchAlbumsError: []
+  fetchAlbumsError: [],
+  albumDetails: ['token','id'],
+  albumDetailsSuccess: ['data']
 });
 
 export const AlbumsTypes = Types;
@@ -17,6 +19,7 @@ export default Creators;
 
 export const INITIAL_STATE = Immutable({
   albums: [],
+  albumDetails: {},
   fetchAlbumsPending: false,
   fetchAlbumsSuccess: false,
   fetchAlbumsError: false,
@@ -35,10 +38,16 @@ const fetchAlbumsError = (state = INITIAL_STATE, action) => {
   return { ...state, fetchAlbumsError: true, fetchAlbumsPending: false };
 };
 
+const fetchAlbumDetails = (state = INITIAL_STATE, action) => {
+  console.log(action.data)
+  return { albumDetails: { ...action.data }, fetchAlbumsPending: false };
+};
+
 /* Reducers to types */
 
 export const albums = createReducer(INITIAL_STATE, {
   [Types.FETCH_ALBUMS_PENDING]: FetchAlbumsPending,
   [Types.FETCH_ALBUMS_SUCCESS]: fetchAlbumsSuccess,
-  [Types.FETCH_ALBUMS_ERROR]: fetchAlbumsError
+  [Types.FETCH_ALBUMS_ERROR]: fetchAlbumsError,
+  [Types.ALBUM_DETAILS_SUCCESS]: fetchAlbumDetails,
 });

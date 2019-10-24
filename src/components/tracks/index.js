@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import PropTypes from 'prop-types';
-import moment from "moment";
+
+import { ListTracks } from './listTracks';
 
 const SearchOverview = ({ artist, tracks, audioControl }) => {
   return (
@@ -23,18 +24,7 @@ const SearchOverview = ({ artist, tracks, audioControl }) => {
         <ol className="trackContent">
           {
             tracks && tracks.items && tracks.items.map(track =>
-              <li key={track.id} className="tracks" onClick={() => audioControl(track)} >
-                <div className="tracks__info">
-                  <h2>{track.name}</h2>
-                  <a alt='link'>
-                    {track.artists[0].name} <span>{artist && artist.items && artist.items[0].name}</span>
-                  </a>
-                </div>
-                <span className="tracks__time">
-                  {`${moment.duration(parseInt(track.duration_ms)).minutes()} : ${moment.duration(parseInt(track.duration_ms)).seconds()}`
-                  }
-                </span>
-              </li>
+              <ListTracks track={track} artist={artist} audioControl={audioControl} />
             )}
         </ol>
       </div>

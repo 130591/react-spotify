@@ -12,7 +12,7 @@ export const Card = (props, styled) => {
     <article
       className={`card ${styled.card}`}
       key={Key}
-      onClick={() => audioControl(songInfo)}
+      onClick={() => audioControl && audioControl(songInfo)}
     >
       <div className={`card-header ${styled.cardHead}`}>
         <img

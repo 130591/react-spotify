@@ -7,7 +7,7 @@ export const PlayList = ({ OnChange }) => {
     if (value) OnChange(value);
   };
 
-  const emitChange = debounce(handleChange, 300);
+  const emitChange = debounce(handleChange, 400);
 
   return (
     <div className="contentPlay">
@@ -15,7 +15,7 @@ export const PlayList = ({ OnChange }) => {
       <input
         type="text"
         className="input-play"
-        placeholder="Comece a escrever..."
+        placeholder="Adicionar uma playlist"
         onChange={e => emitChange(e.target.value)}
       />
     </div>

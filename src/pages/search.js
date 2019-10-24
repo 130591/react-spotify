@@ -3,10 +3,8 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import PropTypes from 'prop-types';
-
 // COMPONENTS
 import OffSearch from "../components/search";
-
 // ACTIONS
 import Creators from "../store/ducks/reprodutions";
 import Token from "../store/ducks/token";
@@ -14,7 +12,7 @@ import Token from "../store/ducks/token";
 class Search extends Component {
   handleSearch = e => {
     e.preventDefault();
-    
+
     const { token } = this.props;
     const { value } = e.target;
 
@@ -34,13 +32,11 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-  playlist: PropTypes.array,
   token: PropTypes.string.isRequired
 }
 
 const mapStateToProps = state => ({
-  playlist: state.reprodution,
-  token: state.token
+  token: state.token.token
 });
 
 const mapDispatchToProps = dispatch =>

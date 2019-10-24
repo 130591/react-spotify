@@ -21,7 +21,7 @@ export function* asyncLoadHome() {
   try {
 
     yield put(Creators.fetchAlbumsPending());
-    
+
     // CALL API
     const token = yield call(UserService.Token);
 
@@ -38,7 +38,7 @@ export function* asyncLoadHome() {
       token,
       "tracks"
     );
-    
+
     // ACTIONS TRIGGERS
     yield put(CreatorsToken.setToken(token));
 
@@ -55,6 +55,23 @@ export function* asyncLoadHome() {
     yield put(Creators.fetchAlbumsError());
     yield put(
       ErrosActions.setError("dander", "Não foi possível obter os dados.")
+    );
+  }
+}
+
+export function* asyncAlbum({ token, id }) {
+  try {
+    // CALL API
+    yield put(Creators.fetchAlbumsPending());
+
+    const resp = yield call(AlbumService.albumDetails, token, id);
+    console.log(resp)
+    yield put(Creators.albumDetailsSuccess(resp.data))
+
+  } catch (err) {
+    yield put(Creators.fetchAlbumsError());
+    yield put(
+      ErrosActions.setError("dander", "Título não encontrado.")
     );
   }
 }
